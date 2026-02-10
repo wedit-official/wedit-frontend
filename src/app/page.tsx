@@ -1,4 +1,5 @@
 import { Button } from "@/components/atoms";
+import { Counter } from "@/components/molecules";
 
 export default function Home() {
   return (
@@ -18,6 +19,8 @@ export default function Home() {
           <Button variant="ghost">Ghost</Button>
           <Button disabled>Disabled</Button>
         </section>
+
+        <Counter />
       </main>
     </div>
   );
