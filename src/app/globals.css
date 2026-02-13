@@ -3,9 +3,6 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-
-  /* 디자인 토큰(초기안) - 추후 디자인 확정 시 교체 */
-  --brand: #f21f57;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,5 +15,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: Pretendard, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
