@@ -5,7 +5,7 @@ import * as React from "react";
 
 import { Button } from "@/components/ui";
 
-import { UnderlineField } from "./_components/UnderlineField";
+import { UnderlineField } from "@/features/auth/components/_shared/UnderlineField";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -67,6 +67,7 @@ export function LoginForm() {
           autoComplete="username"
           error={idError}
           onBlur={() => setTouched((t) => ({ ...t, id: true }))}
+          paddingYClassName="py-5"
         />
 
         <UnderlineField
@@ -78,6 +79,7 @@ export function LoginForm() {
           autoComplete="current-password"
           error={pwError}
           onBlur={() => setTouched((t) => ({ ...t, password: true }))}
+          paddingYClassName="py-5"
         />
       </div>
 
