@@ -11,6 +11,10 @@ export type UnderlineFieldProps = {
   autoComplete?: string;
   onBlur?: () => void;
   error?: string;
+  paddingYClassName?: string;
+  endAddon?: React.ReactNode;
+  reserveErrorSpace?: boolean;
+  wrapperClassName?: string;
 };
 
 export function UnderlineField({
@@ -22,6 +26,10 @@ export function UnderlineField({
   autoComplete,
   onBlur,
   error,
+  paddingYClassName = "py-5",
+  endAddon,
+  reserveErrorSpace = true,
+  wrapperClassName = "flex w-full flex-col gap-2",
 }: UnderlineFieldProps) {
   const id = React.useId();
 
@@ -29,7 +37,7 @@ export function UnderlineField({
   const hasError = Boolean(error);
 
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className={wrapperClassName}>
       <label htmlFor={id} className="sr-only">
         {name}
       </label>
@@ -38,11 +46,11 @@ export function UnderlineField({
         className={[
           // 레이아웃 시프트 방지:
           // - 기본 border-b(1px)는 고정
-          // - hover/focus 시 두꺼운 underline(2px)은 after로 "겹쳐" 그림(높이 변화 없음)
-          "relative flex w-full items-center gap-2.5 border-b py-5",
+          // - focus 시 두꺼운 underline(2px)은 after로 "겹쳐" 그림(높이 변화 없음)
+          "relative flex w-full items-center gap-2.5 border-b",
+          paddingYClassName,
           hasError ? "border-brand-primary" : "border-text-disabled",
           "after:pointer-events-none after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[2px] after:content-['']",
-          // 두꺼운 underline은 'focus-within'일 때만 노출
           hasError
             ? "after:bg-brand-primary after:opacity-0 focus-within:after:opacity-100"
             : "after:bg-text-secondary after:opacity-0 focus-within:after:opacity-100",
@@ -58,22 +66,29 @@ export function UnderlineField({
           onBlur={onBlur}
           placeholder={placeholder}
           aria-invalid={hasError}
-          aria-describedby={errorId}
+          aria-describedby={hasError ? errorId : undefined}
           className="w-full bg-transparent text-lg font-semibold leading-6 text-text-default placeholder:text-text-disabled focus:outline-none"
         />
+        {endAddon ? <div className="shrink-0">{endAddon}</div> : null}
       </div>
 
-      {/* 레이아웃 시프트 방지: 에러 영역은 항상 공간 확보 */}
-      <p
-        id={errorId}
-        aria-live="polite"
-        className={[
-          "min-h-5 text-sm font-normal leading-5 text-brand-primary",
-          hasError ? "visible" : "invisible",
-        ].join(" ")}
-      >
-        {error ?? " "}
-      </p>
+      {reserveErrorSpace ? (
+        // 레이아웃 시프트 방지: 에러 영역은 항상 공간 확보
+        <p
+          id={errorId}
+          aria-live="polite"
+          className={[
+            "min-h-5 text-sm font-normal leading-5 text-brand-primary",
+            hasError ? "visible" : "invisible",
+          ].join(" ")}
+        >
+          {error ?? " "}
+        </p>
+      ) : hasError ? (
+        <p id={errorId} aria-live="polite" className="text-sm font-normal leading-5 text-brand-primary">
+          {error}
+        </p>
+      ) : null}
     </div>
   );
 }
