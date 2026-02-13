@@ -1,11 +1,3 @@
-type TailwindConfig = {
-  content: string[];
-  theme: {
-    extend: Record<string, unknown>;
-  };
-  plugins: unknown[];
-};
-
 const colors = {
   emerald: {
     50: "#ecfdf5",
@@ -45,7 +37,7 @@ const colors = {
   },
 };
 
-const config: TailwindConfig = {
+const config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
@@ -106,3 +98,4 @@ const config: TailwindConfig = {
 };
 
 export default config;
+
