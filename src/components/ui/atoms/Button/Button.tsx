@@ -20,8 +20,8 @@ const variants: Record<ButtonVariant, string> = {
 };
 
 const sizes: Record<ButtonSize, string> = {
-  sm: "h-10 p-4 text-base font-semibold leading-5 tracking-[-2.5px]",
-  mid: "h-14 p-4 text-lg font-semibold leading-6 tracking-[-2.5px]",
+  sm: "h-10 p-4 text-base font-semibold leading-5",
+  mid: "h-14 p-4 text-lg font-semibold leading-6",
 };
 
 export function Button({

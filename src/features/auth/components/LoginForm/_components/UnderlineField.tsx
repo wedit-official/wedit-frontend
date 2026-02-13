@@ -9,6 +9,7 @@ export type UnderlineFieldProps = {
   onChange: (value: string) => void;
   placeholder: string;
   autoComplete?: string;
+  onBlur?: () => void;
   error?: string;
 };
 
@@ -19,6 +20,7 @@ export function UnderlineField({
   onChange,
   placeholder,
   autoComplete,
+  onBlur,
   error,
 }: UnderlineFieldProps) {
   const id = React.useId();
@@ -43,13 +45,14 @@ export function UnderlineField({
           value={value}
           autoComplete={autoComplete}
           onChange={(e) => onChange(e.target.value)}
+          onBlur={onBlur}
           placeholder={placeholder}
-          className="w-full bg-transparent text-lg font-semibold leading-6 tracking-[-2.5px] text-text-default placeholder:text-text-disabled focus:outline-none"
+          className="w-full bg-transparent text-lg font-semibold leading-6 text-text-default placeholder:text-text-disabled focus:outline-none"
         />
       </div>
 
       {error ? (
-        <p className="text-sm font-normal leading-5 tracking-[-2.5px] text-brand-primary">
+        <p className="text-sm font-normal leading-5 text-brand-primary">
           {error}
         </p>
       ) : null}
