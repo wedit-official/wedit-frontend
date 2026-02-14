@@ -1,5 +1,5 @@
-import { Button } from "@/components/atoms";
-import { Counter } from "@/components/molecules";
+import { Button } from "@/components/atoms/Button/Button";
+import { Counter } from "@/components/molecules/Counter/Counter";
 
 export default function Home() {
   return (
