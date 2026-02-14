@@ -3,7 +3,7 @@
 import Link from "next/link";
 import * as React from "react";
 
-import { Button } from "@/components/ui";
+import { Button } from "@/components/ui/atoms/Button/Button";
 
 import { UnderlineField } from "@/features/auth/components/_shared/UnderlineField";
 
