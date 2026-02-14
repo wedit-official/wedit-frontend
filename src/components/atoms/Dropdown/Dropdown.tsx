@@ -65,7 +65,7 @@ export function Dropdown({
                         : "bg-white border-black-disabled"
                     }`}
                   />
-                  <div className="justify-start text-black text-lg font-normal font-['Pretendard'] capitalize leading-6">
+                  <div className="w-full justify-start text-black text-lg font-normal font-['Pretendard'] capitalize leading-6">
                     {option.label}
                   </div>
                 </div>
