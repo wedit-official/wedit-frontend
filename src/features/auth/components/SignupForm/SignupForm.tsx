@@ -31,6 +31,13 @@ export function SignupForm() {
   const [submitting, setSubmitting] = React.useState(false);
   const [touched, setTouched] = React.useState<Record<string, boolean>>({});
 
+  const phoneErrorId = React.useId();
+  const nameErrorId = React.useId();
+  const birthErrorId = React.useId();
+  const emailErrorId = React.useId();
+  const passwordErrorId = React.useId();
+  const passwordConfirmErrorId = React.useId();
+
   const errors = {
     phone: touched.phone && !phone.trim() ? "연락처를 입력해 주세요." : undefined,
     name: touched.name && !name.trim() ? "성명을 입력해 주세요." : undefined,
@@ -90,7 +97,7 @@ export function SignupForm() {
     <form onSubmit={onSubmit} className="w-full">
       <div className="relative flex flex-col items-center justify-start gap-9">
         {/* 라벨-컨트롤을 '행 단위'로 묶어서 1:1 매칭 */}
-        <div className="flex w-full flex-col gap-5">
+        <div className="flex w-full flex-col gap-3">
           <div className="grid grid-cols-[96px_1fr] items-center gap-x-28">
             <div className="w-24 whitespace-nowrap text-lg font-semibold leading-6 text-black uppercase">
               본인인증
@@ -106,7 +113,7 @@ export function SignupForm() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-[96px_1fr] items-center gap-x-28">
+          <div className="grid grid-cols-[96px_1fr] items-center gap-x-28 gap-y-1">
             <div className="w-24 whitespace-nowrap text-lg font-semibold leading-6 text-black uppercase">
               연락처
             </div>
@@ -117,13 +124,27 @@ export function SignupForm() {
               placeholder="010-0000-0000"
               autoComplete="tel"
               error={errors.phone}
+              errorId={phoneErrorId}
+              renderError={false}
               onBlur={() => setTouched((t) => ({ ...t, phone: true }))}
               paddingYClassName="py-2.5"
-            reserveErrorSpace
+              reserveErrorSpace={false}
+              wrapperClassName="w-full"
             />
+            <div />
+            <p
+              id={phoneErrorId}
+              aria-live="polite"
+              className={[
+                "min-h-5 text-sm font-normal leading-5 text-brand-primary",
+                errors.phone ? "visible" : "invisible",
+              ].join(" ")}
+            >
+              {errors.phone ?? " "}
+            </p>
           </div>
 
-          <div className="grid grid-cols-[96px_1fr] items-center gap-x-28">
+          <div className="grid grid-cols-[96px_1fr] items-center gap-x-28 gap-y-1">
             <div className="w-24 whitespace-nowrap text-lg font-semibold leading-6 text-black uppercase">
               성명
             </div>
@@ -134,13 +155,27 @@ export function SignupForm() {
               placeholder="000"
               autoComplete="name"
               error={errors.name}
+              errorId={nameErrorId}
+              renderError={false}
               onBlur={() => setTouched((t) => ({ ...t, name: true }))}
               paddingYClassName="py-2.5"
-              reserveErrorSpace
+              reserveErrorSpace={false}
+              wrapperClassName="w-full"
             />
+            <div />
+            <p
+              id={nameErrorId}
+              aria-live="polite"
+              className={[
+                "min-h-5 text-sm font-normal leading-5 text-brand-primary",
+                errors.name ? "visible" : "invisible",
+              ].join(" ")}
+            >
+              {errors.name ?? " "}
+            </p>
           </div>
 
-          <div className="grid grid-cols-[96px_1fr] items-center gap-x-28">
+          <div className="grid grid-cols-[96px_1fr] items-center gap-x-28 gap-y-1">
             <div className="w-24 whitespace-nowrap text-lg font-semibold leading-6 text-black uppercase">
               생년월일
             </div>
@@ -151,13 +186,27 @@ export function SignupForm() {
               placeholder="2001.00.00"
               autoComplete="bday"
               error={errors.birth}
+              errorId={birthErrorId}
+              renderError={false}
               onBlur={() => setTouched((t) => ({ ...t, birth: true }))}
               paddingYClassName="py-2.5"
-              reserveErrorSpace
+              reserveErrorSpace={false}
+              wrapperClassName="w-full"
             />
+            <div />
+            <p
+              id={birthErrorId}
+              aria-live="polite"
+              className={[
+                "min-h-5 text-sm font-normal leading-5 text-brand-primary",
+                errors.birth ? "visible" : "invisible",
+              ].join(" ")}
+            >
+              {errors.birth ?? " "}
+            </p>
           </div>
 
-          <div className="grid grid-cols-[96px_1fr] items-center gap-x-28">
+          <div className="grid grid-cols-[96px_1fr] items-center gap-x-28 gap-y-1">
             <div className="w-24 whitespace-nowrap text-lg font-semibold leading-6 text-black uppercase">
               아이디
             </div>
@@ -169,9 +218,12 @@ export function SignupForm() {
               placeholder="이메일을 입력해 주세요."
               autoComplete="email"
               error={errors.email}
+              errorId={emailErrorId}
+              renderError={false}
               onBlur={() => setTouched((t) => ({ ...t, email: true }))}
               paddingYClassName="py-3"
-              reserveErrorSpace
+              reserveErrorSpace={false}
+              wrapperClassName="w-full"
               endAddon={
                 <Button
                   type="button"
@@ -183,9 +235,20 @@ export function SignupForm() {
                 </Button>
               }
             />
+            <div />
+            <p
+              id={emailErrorId}
+              aria-live="polite"
+              className={[
+                "min-h-5 text-sm font-normal leading-5 text-brand-primary",
+                errors.email ? "visible" : "invisible",
+              ].join(" ")}
+            >
+              {errors.email ?? " "}
+            </p>
           </div>
 
-          <div className="grid grid-cols-[96px_1fr] items-center gap-x-28">
+          <div className="grid grid-cols-[96px_1fr] items-center gap-x-28 gap-y-1">
             <div className="w-24 whitespace-nowrap text-lg font-semibold leading-6 text-black uppercase">
               비밀번호
             </div>
@@ -197,13 +260,27 @@ export function SignupForm() {
               placeholder="대소문자, 숫자. 특수문자 포함 8글자 이상"
               autoComplete="new-password"
               error={errors.password}
+              errorId={passwordErrorId}
+              renderError={false}
               onBlur={() => setTouched((t) => ({ ...t, password: true }))}
               paddingYClassName="py-2.5"
-              reserveErrorSpace
+              reserveErrorSpace={false}
+              wrapperClassName="w-full"
             />
+            <div />
+            <p
+              id={passwordErrorId}
+              aria-live="polite"
+              className={[
+                "min-h-5 text-sm font-normal leading-5 text-brand-primary",
+                errors.password ? "visible" : "invisible",
+              ].join(" ")}
+            >
+              {errors.password ?? " "}
+            </p>
           </div>
 
-          <div className="grid grid-cols-[96px_1fr] items-center gap-x-28">
+          <div className="grid grid-cols-[96px_1fr] items-center gap-x-28 gap-y-1">
             <div className="w-24 whitespace-nowrap text-lg font-semibold leading-6 text-black uppercase">
               비밀번호 확인
             </div>
@@ -215,10 +292,24 @@ export function SignupForm() {
               placeholder="설정한 비밀번호를 입력해 주세요."
               autoComplete="new-password"
               error={errors.passwordConfirm}
+              errorId={passwordConfirmErrorId}
+              renderError={false}
               onBlur={() => setTouched((t) => ({ ...t, passwordConfirm: true }))}
               paddingYClassName="py-2.5"
-              reserveErrorSpace
+              reserveErrorSpace={false}
+              wrapperClassName="w-full"
             />
+            <div />
+            <p
+              id={passwordConfirmErrorId}
+              aria-live="polite"
+              className={[
+                "min-h-5 text-sm font-normal leading-5 text-brand-primary",
+                errors.passwordConfirm ? "visible" : "invisible",
+              ].join(" ")}
+            >
+              {errors.passwordConfirm ?? " "}
+            </p>
           </div>
         </div>
 
