@@ -11,6 +11,8 @@ export type UnderlineFieldProps = {
   autoComplete?: string;
   onBlur?: () => void;
   error?: string;
+  errorId?: string;
+  renderError?: boolean;
   paddingYClassName?: string;
   endAddon?: React.ReactNode;
   reserveErrorSpace?: boolean;
@@ -26,6 +28,8 @@ export function UnderlineField({
   autoComplete,
   onBlur,
   error,
+  errorId: errorIdProp,
+  renderError = true,
   paddingYClassName = "py-5",
   endAddon,
   reserveErrorSpace = true,
@@ -33,7 +37,7 @@ export function UnderlineField({
 }: UnderlineFieldProps) {
   const id = React.useId();
 
-  const errorId = `${id}-error`;
+  const errorId = errorIdProp ?? `${id}-error`;
   const hasError = Boolean(error);
 
   return (
@@ -72,7 +76,7 @@ export function UnderlineField({
         {endAddon ? <div className="shrink-0">{endAddon}</div> : null}
       </div>
 
-      {reserveErrorSpace ? (
+      {!renderError ? null : reserveErrorSpace ? (
         // 레이아웃 시프트 방지: 에러 영역은 항상 공간 확보
         <p
           id={errorId}
