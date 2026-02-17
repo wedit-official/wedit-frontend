@@ -1,19 +1,23 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import { FontLoader } from "@/components/FontLoader";
 import "./globals.css";
-
-export const metadata: Metadata = {
-  title: "Wedit",
-  description: "결혼 업체 중개 서비스 플랫폼",
-};
+import { PublicFooter } from "@/components/shared/layouts/PublicFooter";
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="ko">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <FontLoader />
+        <div className="flex flex-col min-h-screen">
+          <main className="flex-1">{children}</main>
+          <PublicFooter />
+        </div>
+      </body>
     </html>
   );
 }

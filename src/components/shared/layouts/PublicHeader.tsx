@@ -77,14 +77,14 @@ export function PublicHeader() {
 
             <Link
               href="/login"
-              className="inline-flex h-10 items-center justify-center rounded-[222px] bg-white p-4 text-base font-semibold leading-5 text-text-default outline outline-[0.7px] outline-offset-[-0.7px] outline-text-default"
+              className="inline-flex h-10 items-center justify-center rounded-[222px] bg-white p-4 text-base font-semibold leading-5 text-text-default outline-[0.7px] outline-offset-[-0.7px] outline-text-default"
             >
               log in
             </Link>
 
             <Link
               href="/quotes"
-              className="group inline-flex h-14 items-center justify-center gap-2.5 rounded-[222px] bg-brand-primary p-4 text-lg font-semibold leading-6 text-white hover:bg-white hover:text-text-default hover:outline hover:outline-1 hover:outline-offset-[-1px] hover:outline-text-default"
+              className="group inline-flex h-14 items-center justify-center gap-2.5 rounded-[222px] bg-brand-primary p-4 text-lg font-semibold leading-6 text-white hover:bg-white hover:text-text-default hover:outline-1 hover:-outline-offset-1 hover:outline-text-default"
             >
               <span aria-hidden className="inline-flex h-7 w-7 items-center justify-center">
                 <BasketIcon className="h-7 w-7 text-white group-hover:text-text-default" />

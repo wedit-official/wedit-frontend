@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/atoms";
-import { useCounterStore } from "@/store";
+import { Button } from "@/components/atoms/Button/Button";
+import { useCounterStore } from "@/store/counterStore";
 
 export function Counter() {
   const count = useCounterStore((s) => s.count);
