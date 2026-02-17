@@ -1,6 +1,6 @@
 "use client";
-import * as React from "react";
 import Image from "next/image";
+import * as React from "react";
 
 import { Button } from "@/components/ui";
 import {
@@ -11,8 +11,8 @@ import {
 } from "@/features/quotes/model/quotes";
 import { useQuotesStore } from "@/features/quotes/store/quotesStore";
 
-import { QuoteCard } from "./_components/QuoteCard";
 import { OptionChangeModal } from "./_components/OptionChangeModal";
+import { QuoteCard } from "./_components/QuoteCard";
 
 function CategoryPill({
   label,
@@ -100,7 +100,7 @@ export function QuotesPage() {
 
   return (
     <div className="w-full bg-[var(--gray-white)]">
-      <div className="mx-auto w-full max-w-[1440px] px-12 pb-20">
+      <div className="w-full px-[clamp(24px,5vw,96px)] pb-20">
         {/* Title */}
         <div className="flex flex-col items-center gap-5 pt-10">
           <div className="w-full">
@@ -170,10 +170,10 @@ export function QuotesPage() {
           </div>
         </div>
 
-        {/* Summary frame (2x2 + total) */}
+        {/* Summary frame — 좌측 2/3(약 67%), 우측 총 견적 1/3(약 33%) 비율 */}
         <div className="mt-12 rounded-xl bg-[var(--gray-white)] outline outline-[0.6px] outline-offset-[-0.6px] outline-[color:var(--gray-300)]">
-          <div className="grid grid-cols-[1fr_420px]">
-            <div className="grid grid-cols-2 grid-rows-2">
+          <div className="grid grid-cols-[6fr_4fr]">
+            <div className="grid min-w-0 grid-cols-2 grid-rows-2">
               {[
                 { label: "웨딩홀", item: selectedWeddingHall },
                 { label: "스튜디오", item: selectedStudio },
@@ -215,7 +215,7 @@ export function QuotesPage() {
             </div>
 
             <div className="flex items-center justify-center p-8">
-              <div className="relative flex w-full items-center justify-between gap-8">
+              <div className="flex w-full items-center gap-8">
                 <div className="relative h-40 w-44 shrink-0">
                   <Image
                     src="/assets/graphic/cart.svg"
@@ -227,9 +227,9 @@ export function QuotesPage() {
                   />
                 </div>
 
-                <div className="flex flex-1 flex-col items-start">
+                <div className="flex min-w-0 flex-1 flex-col items-start">
                   <div className="text-head-5 text-[var(--black-secondary)] uppercase">총 견적</div>
-                  <div className="mt-2 text-head-1 text-[var(--brand-primary)]">
+                  <div className="mt-2 whitespace-nowrap text-head-1 text-[var(--brand-primary)]">
                     {formatWon(totalWon)}
                   </div>
                 </div>
