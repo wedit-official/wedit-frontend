@@ -53,11 +53,11 @@ export function UnderlineField({
           // - focus 시 두꺼운 underline(2px)은 after로 "겹쳐" 그림(높이 변화 없음)
           "relative flex w-full items-center gap-2.5 border-b",
           paddingYClassName,
-          hasError ? "border-brand-primary" : "border-text-disabled",
+          hasError ? "border-[var(--brand-primary)]" : "border-[var(--gray-300)]",
           "after:pointer-events-none after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[2px] after:content-['']",
           hasError
-            ? "after:bg-brand-primary after:opacity-0 focus-within:after:opacity-100"
-            : "after:bg-text-secondary after:opacity-0 focus-within:after:opacity-100",
+            ? "after:bg-[var(--brand-primary)] after:opacity-0 focus-within:after:opacity-100"
+            : "after:bg-[var(--black-secondary)] after:opacity-0 focus-within:after:opacity-100",
         ].join(" ")}
       >
         <input
@@ -71,7 +71,7 @@ export function UnderlineField({
           placeholder={placeholder}
           aria-invalid={hasError}
           aria-describedby={hasError ? errorId : undefined}
-          className="w-full bg-transparent text-lg font-semibold leading-6 text-text-default placeholder:text-text-disabled focus:outline-none"
+          className="w-full bg-transparent text-body-2 text-[var(--black-default)] placeholder:text-[var(--black-disabled)] focus:outline-none"
         />
         {endAddon ? <div className="shrink-0">{endAddon}</div> : null}
       </div>
@@ -82,14 +82,18 @@ export function UnderlineField({
           id={errorId}
           aria-live="polite"
           className={[
-            "min-h-5 text-sm font-normal leading-5 text-brand-primary",
+            "min-h-5 text-sm font-normal leading-5 text-[var(--brand-primary)]",
             hasError ? "visible" : "invisible",
           ].join(" ")}
         >
           {error ?? " "}
         </p>
       ) : hasError ? (
-        <p id={errorId} aria-live="polite" className="text-sm font-normal leading-5 text-brand-primary">
+        <p
+          id={errorId}
+          aria-live="polite"
+          className="text-sm font-normal leading-5 text-[var(--brand-primary)]"
+        >
           {error}
         </p>
       ) : null}

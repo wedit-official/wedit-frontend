@@ -99,7 +99,7 @@ export function SignupForm() {
         {/* 라벨-컨트롤을 '행 단위'로 묶어서 1:1 매칭 */}
         <div className="flex w-full flex-col gap-3">
           <div className="grid grid-cols-[96px_1fr] items-center gap-x-28">
-            <div className="w-24 whitespace-nowrap text-lg font-semibold leading-6 text-black uppercase">
+            <div className="w-24 whitespace-nowrap text-body-2 text-[var(--black-default)] uppercase">
               본인인증
             </div>
             <Button
@@ -114,7 +114,7 @@ export function SignupForm() {
           </div>
 
           <div className="grid grid-cols-[96px_1fr] items-center gap-x-28 gap-y-1">
-            <div className="w-24 whitespace-nowrap text-lg font-semibold leading-6 text-black uppercase">
+            <div className="w-24 whitespace-nowrap text-body-2 text-[var(--black-default)] uppercase">
               연락처
             </div>
             <UnderlineField
@@ -136,7 +136,7 @@ export function SignupForm() {
               id={phoneErrorId}
               aria-live="polite"
               className={[
-                "min-h-5 text-sm font-normal leading-5 text-brand-primary",
+                "min-h-5 text-sm font-normal leading-5 text-[var(--brand-primary)]",
                 errors.phone ? "visible" : "invisible",
               ].join(" ")}
             >
@@ -145,7 +145,7 @@ export function SignupForm() {
           </div>
 
           <div className="grid grid-cols-[96px_1fr] items-center gap-x-28 gap-y-1">
-            <div className="w-24 whitespace-nowrap text-lg font-semibold leading-6 text-black uppercase">
+            <div className="w-24 whitespace-nowrap text-body-2 text-[var(--black-default)] uppercase">
               성명
             </div>
             <UnderlineField
@@ -167,7 +167,7 @@ export function SignupForm() {
               id={nameErrorId}
               aria-live="polite"
               className={[
-                "min-h-5 text-sm font-normal leading-5 text-brand-primary",
+                "min-h-5 text-sm font-normal leading-5 text-[var(--brand-primary)]",
                 errors.name ? "visible" : "invisible",
               ].join(" ")}
             >
@@ -176,7 +176,7 @@ export function SignupForm() {
           </div>
 
           <div className="grid grid-cols-[96px_1fr] items-center gap-x-28 gap-y-1">
-            <div className="w-24 whitespace-nowrap text-lg font-semibold leading-6 text-black uppercase">
+            <div className="w-24 whitespace-nowrap text-body-2 text-[var(--black-default)] uppercase">
               생년월일
             </div>
             <UnderlineField
@@ -198,7 +198,7 @@ export function SignupForm() {
               id={birthErrorId}
               aria-live="polite"
               className={[
-                "min-h-5 text-sm font-normal leading-5 text-brand-primary",
+                "min-h-5 text-sm font-normal leading-5 text-[var(--brand-primary)]",
                 errors.birth ? "visible" : "invisible",
               ].join(" ")}
             >
@@ -207,7 +207,7 @@ export function SignupForm() {
           </div>
 
           <div className="grid grid-cols-[96px_1fr] items-center gap-x-28 gap-y-1">
-            <div className="w-24 whitespace-nowrap text-lg font-semibold leading-6 text-black uppercase">
+            <div className="w-24 whitespace-nowrap text-body-2 text-[var(--black-default)] uppercase">
               아이디
             </div>
             <UnderlineField
@@ -240,7 +240,7 @@ export function SignupForm() {
               id={emailErrorId}
               aria-live="polite"
               className={[
-                "min-h-5 text-sm font-normal leading-5 text-brand-primary",
+                "min-h-5 text-sm font-normal leading-5 text-[var(--brand-primary)]",
                 errors.email ? "visible" : "invisible",
               ].join(" ")}
             >
@@ -249,7 +249,7 @@ export function SignupForm() {
           </div>
 
           <div className="grid grid-cols-[96px_1fr] items-center gap-x-28 gap-y-1">
-            <div className="w-24 whitespace-nowrap text-lg font-semibold leading-6 text-black uppercase">
+            <div className="w-24 whitespace-nowrap text-body-2 text-[var(--black-default)] uppercase">
               비밀번호
             </div>
             <UnderlineField
@@ -272,7 +272,7 @@ export function SignupForm() {
               id={passwordErrorId}
               aria-live="polite"
               className={[
-                "min-h-5 text-sm font-normal leading-5 text-brand-primary",
+                "min-h-5 text-sm font-normal leading-5 text-[var(--brand-primary)]",
                 errors.password ? "visible" : "invisible",
               ].join(" ")}
             >
@@ -281,7 +281,7 @@ export function SignupForm() {
           </div>
 
           <div className="grid grid-cols-[96px_1fr] items-center gap-x-28 gap-y-1">
-            <div className="w-24 whitespace-nowrap text-lg font-semibold leading-6 text-black uppercase">
+            <div className="w-24 whitespace-nowrap text-body-2 text-[var(--black-default)] uppercase">
               비밀번호 확인
             </div>
             <UnderlineField
@@ -304,7 +304,7 @@ export function SignupForm() {
               id={passwordConfirmErrorId}
               aria-live="polite"
               className={[
-                "min-h-5 text-sm font-normal leading-5 text-brand-primary",
+                "min-h-5 text-sm font-normal leading-5 text-[var(--brand-primary)]",
                 errors.passwordConfirm ? "visible" : "invisible",
               ].join(" ")}
             >

@@ -39,55 +39,55 @@ body {
 .text-head-1 {
   font-size: 48px;
   line-height: 140%;
-  letter-spacing: -2.5px;
+  letter-spacing: -0.025em;
   font-weight: 600; /* Semi Bold */
 }
 
 .text-head-2 {
   font-size: 26px;
   line-height: 140%;
-  letter-spacing: -2.5px;
+  letter-spacing: -0.025em;
   font-weight: 600; /* Semi Bold */
 }
 
 .text-head-3 {
   font-size: 20px;
   line-height: 140%;
-  letter-spacing: -2.5px;
+  letter-spacing: -0.025em;
   font-weight: 400; /* Regular */
 }
 
 .text-head-4 {
   font-size: 18px;
   line-height: 140%;
-  letter-spacing: -2.5px;
+  letter-spacing: -0.025em;
   font-weight: 800; /* Extra Bold */
 }
 
 .text-head-5 {
   font-size: 18px;
   line-height: 140%;
-  letter-spacing: -2.5px;
+  letter-spacing: -0.025em;
   font-weight: 600; /* Semi Bold */
 }
 
 .text-body-1 {
   font-size: 18px;
   line-height: 140%;
-  letter-spacing: -2.5px;
+  letter-spacing: -0.025em;
   font-weight: 400; /* Regular */
 }
 
 .text-body-2 {
   font-size: 15px;
   line-height: 140%;
-  letter-spacing: -2.5px;
+  letter-spacing: -0.025em;
   font-weight: 600; /* Semi Bold */
 }
 
 .text-body-3 {
   font-size: 15px;
   line-height: 140%;
-  letter-spacing: -2.5px;
+  letter-spacing: -0.025em;
   font-weight: 400; /* Regular */
 }

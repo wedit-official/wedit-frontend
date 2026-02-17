@@ -4,17 +4,17 @@ import Link from "next/link";
 
 export function PublicFooter() {
   return (
-    <footer className="w-full bg-gray-200">
+    <footer className="w-full bg-[var(--gray-200)]">
       <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-4 px-12 py-7">
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-2">
-            <div className="text-2xl font-semibold leading-9 text-text-secondary">
+            <div className="text-2xl font-semibold leading-9 text-[var(--black-secondary)]">
               WEDIT
             </div>
-            <div className="text-base font-normal leading-5 text-text-secondary">
+            <div className="text-base font-normal leading-5 text-[var(--black-secondary)]">
               제휴 및 입점 문의 : weditteam0@gmail.com
             </div>
-            <div className="text-base font-normal leading-5 text-text-secondary">
+            <div className="text-base font-normal leading-5 text-[var(--black-secondary)]">
               © 2026 웨딧. All rights reserved.
             </div>
           </div>
@@ -22,13 +22,13 @@ export function PublicFooter() {
           <div className="flex items-center gap-8">
             <Link
               href="/terms"
-              className="text-lg font-normal leading-6 text-text-secondary underline"
+              className="text-lg font-normal leading-6 text-[var(--black-secondary)] underline"
             >
               이용약관
             </Link>
             <Link
               href="/privacy"
-              className="text-lg font-normal leading-6 text-text-secondary underline"
+              className="text-lg font-normal leading-6 text-[var(--black-secondary)] underline"
             >
               개인정보 처리방침
             </Link>
