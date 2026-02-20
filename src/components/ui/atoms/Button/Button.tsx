@@ -14,7 +14,7 @@ const base =
   "inline-flex items-center justify-center rounded-[222px] transition-colors disabled:cursor-not-allowed disabled:opacity-60";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-brand-primary text-white",
+  primary: "bg-coral-400 text-white",
   outline:
     "bg-white text-text-default outline outline-[0.7px] outline-offset-[-0.7px] outline-text-default",
 };
