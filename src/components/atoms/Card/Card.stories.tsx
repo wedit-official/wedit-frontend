@@ -1,6 +1,7 @@
 "use client";
 
 import type { Meta, StoryObj } from "@storybook/react";
+import type { ComponentProps } from "react";
 import { useState } from "react";
 import { Card } from "./Card";
 
@@ -28,21 +29,24 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  render: (args) => {
-    const [isLiked, setIsLiked] = useState(args.isLiked || false);
+function CardWithLikeState(
+  args: ComponentProps<typeof Card> & { isLiked?: boolean }
+) {
+  const [isLiked, setIsLiked] = useState(args.isLiked ?? false);
+  return (
+    <Card
+      {...args}
+      isLiked={isLiked}
+      onLike={() => {
+        setIsLiked(!isLiked);
+        args.onLike?.();
+      }}
+    />
+  );
+}
 
-    return (
-      <Card
-        {...args}
-        isLiked={isLiked}
-        onLike={() => {
-          setIsLiked(!isLiked);
-          args.onLike?.();
-        }}
-      />
-    );
-  },
+export const Default: Story = {
+  render: (args) => <CardWithLikeState {...args} />,
   args: {
     title: "아펠가모 선릉",
     address: "서울특별시 강남구 테헤란로 322 24빌딩 4층",

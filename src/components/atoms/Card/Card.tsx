@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import Image from "next/image";
 
 export type CardProps = {
@@ -53,7 +52,7 @@ export function Card({
         </p>
 
         <div className="w-full h-11 left-0 top-[161px] absolute">
-          <p className="left-[70px] top-0 absolute justify-start text-brand-primary text-3xl font-semibold font-['Pretendard'] uppercase leading-10">
+          <p className="left-[70px] top-0 absolute justify-start text-coral-400 text-3xl font-semibold font-['Pretendard'] uppercase leading-10">
             {price}
           </p>
           <div className="left-0 top-[5px] absolute justify-start text-black-default text-2xl font-semibold uppercase leading-9">

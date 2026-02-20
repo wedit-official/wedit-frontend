@@ -84,7 +84,7 @@ export function PublicHeader() {
 
             <Link
               href="/quotes"
-              className="group inline-flex h-14 items-center justify-center gap-2.5 rounded-[222px] bg-[var(--brand-primary)] p-4 text-head-5 text-[var(--gray-white)] hover:bg-[var(--gray-white)] hover:text-[var(--black-default)] hover:outline hover:outline-1 hover:-outline-offset-1 hover:outline-[color:var(--black-default)]"
+              className="group inline-flex h-14 items-center justify-center gap-2.5 rounded-[222px] bg-coral-400 p-4 text-lg font-semibold leading-6 text-white hover:bg-white hover:text-text-default hover:outline-1 hover:-outline-offset-1 hover:outline-text-default"
             >
               <span aria-hidden className="inline-flex h-7 w-7 items-center justify-center">
                 <BasketIcon className="h-7 w-7 text-[var(--gray-white)] group-hover:text-[var(--black-default)]" />

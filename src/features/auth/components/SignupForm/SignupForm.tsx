@@ -136,7 +136,7 @@ export function SignupForm() {
               id={phoneErrorId}
               aria-live="polite"
               className={[
-                "min-h-5 text-sm font-normal leading-5 text-[var(--brand-primary)]",
+                "min-h-5 text-sm font-normal leading-5 text-coral-400",
                 errors.phone ? "visible" : "invisible",
               ].join(" ")}
             >
@@ -167,7 +167,7 @@ export function SignupForm() {
               id={nameErrorId}
               aria-live="polite"
               className={[
-                "min-h-5 text-sm font-normal leading-5 text-[var(--brand-primary)]",
+                "min-h-5 text-sm font-normal leading-5 text-coral-400",
                 errors.name ? "visible" : "invisible",
               ].join(" ")}
             >
@@ -198,7 +198,7 @@ export function SignupForm() {
               id={birthErrorId}
               aria-live="polite"
               className={[
-                "min-h-5 text-sm font-normal leading-5 text-[var(--brand-primary)]",
+                "min-h-5 text-sm font-normal leading-5 text-coral-400",
                 errors.birth ? "visible" : "invisible",
               ].join(" ")}
             >
@@ -240,7 +240,7 @@ export function SignupForm() {
               id={emailErrorId}
               aria-live="polite"
               className={[
-                "min-h-5 text-sm font-normal leading-5 text-[var(--brand-primary)]",
+                "min-h-5 text-sm font-normal leading-5 text-coral-400",
                 errors.email ? "visible" : "invisible",
               ].join(" ")}
             >
@@ -272,7 +272,7 @@ export function SignupForm() {
               id={passwordErrorId}
               aria-live="polite"
               className={[
-                "min-h-5 text-sm font-normal leading-5 text-[var(--brand-primary)]",
+                "min-h-5 text-sm font-normal leading-5 text-coral-400",
                 errors.password ? "visible" : "invisible",
               ].join(" ")}
             >
@@ -304,7 +304,7 @@ export function SignupForm() {
               id={passwordConfirmErrorId}
               aria-live="polite"
               className={[
-                "min-h-5 text-sm font-normal leading-5 text-[var(--brand-primary)]",
+                "min-h-5 text-sm font-normal leading-5 text-coral-400",
                 errors.passwordConfirm ? "visible" : "invisible",
               ].join(" ")}
             >

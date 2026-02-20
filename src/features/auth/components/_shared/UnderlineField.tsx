@@ -53,11 +53,11 @@ export function UnderlineField({
           // - focus 시 두꺼운 underline(2px)은 after로 "겹쳐" 그림(높이 변화 없음)
           "relative flex w-full items-center gap-2.5 border-b",
           paddingYClassName,
-          hasError ? "border-[var(--brand-primary)]" : "border-[var(--gray-300)]",
+          hasError ? "border-coral-400" : "border-text-disabled",
           "after:pointer-events-none after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[2px] after:content-['']",
           hasError
-            ? "after:bg-[var(--brand-primary)] after:opacity-0 focus-within:after:opacity-100"
-            : "after:bg-[var(--black-secondary)] after:opacity-0 focus-within:after:opacity-100",
+            ? "after:bg-coral-400 after:opacity-0 focus-within:after:opacity-100"
+            : "after:bg-text-secondary after:opacity-0 focus-within:after:opacity-100",
         ].join(" ")}
       >
         <input
@@ -82,18 +82,14 @@ export function UnderlineField({
           id={errorId}
           aria-live="polite"
           className={[
-            "min-h-5 text-sm font-normal leading-5 text-[var(--brand-primary)]",
+            "min-h-5 text-sm font-normal leading-5 text-coral-400",
             hasError ? "visible" : "invisible",
           ].join(" ")}
         >
           {error ?? " "}
         </p>
       ) : hasError ? (
-        <p
-          id={errorId}
-          aria-live="polite"
-          className="text-sm font-normal leading-5 text-[var(--brand-primary)]"
-        >
+        <p id={errorId} aria-live="polite" className="text-sm font-normal leading-5 text-coral-400">
           {error}
         </p>
       ) : null}
