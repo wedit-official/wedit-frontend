@@ -71,7 +71,7 @@ export function UnderlineField({
           placeholder={placeholder}
           aria-invalid={hasError}
           aria-describedby={hasError ? errorId : undefined}
-          className="w-full bg-transparent text-lg font-semibold leading-6 text-text-default placeholder:text-text-disabled focus:outline-none"
+          className="w-full bg-transparent text-body-2 text-[var(--black-default)] placeholder:text-[var(--black-disabled)] focus:outline-none"
         />
         {endAddon ? <div className="shrink-0">{endAddon}</div> : null}
       </div>

@@ -5,7 +5,7 @@ import { PublicHeader } from "@/components/shared/layouts/PublicHeader";
 
 export default function PublicLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-dvh flex-col bg-white">
+    <div className="flex min-h-dvh flex-col bg-[var(--background)]">
       <PublicHeader />
       <div className="flex-1">{children}</div>
       <PublicFooter />

@@ -68,7 +68,7 @@ export function PublicHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-lg font-semibold leading-6 text-text-tertiary uppercase"
+                  className="text-head-5 text-[var(--black-tertiary)] uppercase"
                 >
                   {item.label}
                 </Link>
@@ -77,7 +77,7 @@ export function PublicHeader() {
 
             <Link
               href="/login"
-              className="inline-flex h-10 items-center justify-center rounded-[222px] bg-white p-4 text-base font-semibold leading-5 text-text-default outline-[0.7px] outline-offset-[-0.7px] outline-text-default"
+              className="inline-flex h-10 items-center justify-center rounded-[222px] bg-[var(--gray-white)] p-4 text-body-2 text-[var(--black-default)] outline-[0.7px] outline-offset-[-0.7px] outline-[color:var(--black-default)]"
             >
               log in
             </Link>
@@ -87,7 +87,7 @@ export function PublicHeader() {
               className="group inline-flex h-14 items-center justify-center gap-2.5 rounded-[222px] bg-coral-400 p-4 text-lg font-semibold leading-6 text-white hover:bg-white hover:text-text-default hover:outline-1 hover:-outline-offset-1 hover:outline-text-default"
             >
               <span aria-hidden className="inline-flex h-7 w-7 items-center justify-center">
-                <BasketIcon className="h-7 w-7 text-white group-hover:text-text-default" />
+                <BasketIcon className="h-7 w-7 text-[var(--gray-white)] group-hover:text-[var(--black-default)]" />
               </span>
               견적서 보러가기
             </Link>

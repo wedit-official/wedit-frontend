@@ -16,12 +16,12 @@ const base =
 const variants: Record<ButtonVariant, string> = {
   primary: "bg-coral-400 text-white",
   outline:
-    "bg-white text-text-default outline outline-[0.7px] outline-offset-[-0.7px] outline-text-default",
+    "bg-[var(--gray-white)] text-[var(--black-default)] outline outline-[0.7px] outline-offset-[-0.7px] outline-[color:var(--black-default)]",
 };
 
 const sizes: Record<ButtonSize, string> = {
-  sm: "h-10 p-4 text-base font-semibold leading-5",
-  mid: "h-14 p-4 text-lg font-semibold leading-6",
+  sm: "h-10 p-4 text-body-2",
+  mid: "h-14 p-4 text-body-2",
 };
 
 export function Button({

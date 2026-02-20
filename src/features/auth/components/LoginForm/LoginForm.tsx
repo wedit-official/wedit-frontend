@@ -91,19 +91,19 @@ export function LoginForm() {
         <div className="inline-flex items-start justify-start gap-8">
           <Link
             href="/find-id"
-            className="text-base font-normal leading-5 text-text-default underline"
+            className="text-body-3 text-[var(--black-default)] underline"
           >
             아이디 찾기
           </Link>
           <Link
             href="/find-password"
-            className="text-base font-normal leading-5 text-text-default underline"
+            className="text-body-3 text-[var(--black-default)] underline"
           >
             비밀번호 찾기
           </Link>
           <Link
             href="/signup"
-            className="text-base font-normal leading-5 text-text-default underline"
+            className="text-body-3 text-[var(--black-default)] underline"
           >
             회원가입 하기
           </Link>
@@ -112,11 +112,9 @@ export function LoginForm() {
 
       <div className="flex flex-col items-center gap-4">
         <div className="inline-flex w-full max-w-[1000px] items-center justify-center gap-2.5">
-          <div className="h-0 w-80 outline outline-1 outline-offset-[-0.5px] outline-text-disabled" />
-          <div className="flex-1 text-lg font-normal leading-6 text-text-default">
-            OR
-          </div>
-          <div className="h-0 w-80 outline outline-1 outline-offset-[-0.5px] outline-text-disabled" />
+          <div className="h-0 w-80 outline outline-1 outline-offset-[-0.5px] outline-[color:var(--gray-300)]" />
+          <div className="flex-1 text-body-3 text-[var(--black-default)]">OR</div>
+          <div className="h-0 w-80 outline outline-1 outline-offset-[-0.5px] outline-[color:var(--gray-300)]" />
         </div>
 
         <div className="inline-flex w-64 items-start justify-start gap-7">
@@ -131,7 +129,7 @@ export function LoginForm() {
               type="button"
               aria-label={`${item.label} 로그인`}
               onClick={() => alert("소셜 로그인은 준비 중입니다.")}
-              className="inline-flex h-10 w-10 overflow-hidden rounded-full bg-white"
+              className="inline-flex h-10 w-10 overflow-hidden rounded-full bg-[var(--gray-white)]"
             >
               <img src={item.src} alt="" className="h-full w-full object-cover" />
             </button>
