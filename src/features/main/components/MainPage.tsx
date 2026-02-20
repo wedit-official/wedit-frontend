@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { SearchBar } from "@/components/atoms/SearchBar/SearchBar";
 import { PriceBarChart, createMonthlyData } from "@/components/molecules/PriceBarChart/PriceBarChart";
 import { Button } from "@/components/ui/atoms/Button/Button";
@@ -11,7 +13,15 @@ const CHART_SAMPLE_VALUES = [
 ];
 
 export function MainPage() {
+  const router = useRouter();
+  const [keyword, setKeyword] = useState("");
   const chartData = createMonthlyData(CHART_SAMPLE_VALUES);
+
+  const handleSearchSubmit = () => {
+    const params = new URLSearchParams();
+    if (keyword.trim()) params.set("keyword", keyword.trim());
+    router.push(`/search${params.toString() ? `?${params.toString()}` : ""}`);
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-grey-300">
@@ -41,6 +51,9 @@ export function MainPage() {
               <div className="w-full max-w-[922px]">
                 <SearchBar
                   placeholder="관심있는 웨딩업체의 최저가를 빠르게 찾아보세요"
+                  value={keyword}
+                  onChange={setKeyword}
+                  onSubmit={handleSearchSubmit}
                   focused={false}
                 />
               </div>
