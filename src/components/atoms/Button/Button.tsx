@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-type ButtonVariant = "primary" | "secondary" | "ghost";
+type ButtonVariant = "primary" | "outline" | "selected";
 type ButtonSize = "sm" | "md" | "lg";
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -11,20 +11,21 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const base =
-  "inline-flex items-center justify-center rounded-xl font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2.5 rounded-[222px] font-semibold font-sans capitalize transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-brand-600 text-white hover:bg-brand-700",
-  secondary:
-    "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-50 dark:hover:bg-zinc-800",
-  ghost:
-    "bg-transparent text-zinc-900 hover:bg-zinc-100 dark:text-zinc-50 dark:hover:bg-zinc-900",
+  primary:
+    "bg-coral-400 text-white hover:bg-coral-500 outline-none",
+  outline:
+    "bg-white text-grey-900 outline outline-[0.70px] outline-offset-[-0.70px] outline-grey-900 hover:bg-grey-100",
+  selected:
+    "bg-white text-coral-400 outline outline-[1.6px] outline-offset-[-1.6px] outline-coral-400 hover:bg-coral-100",
 };
 
 const sizes: Record<ButtonSize, string> = {
-  sm: "h-9 px-3 text-sm",
-  md: "h-11 px-4 text-sm",
-  lg: "h-12 px-5 text-base",
+  sm: "h-9 px-3 text-sm leading-5",
+  md: "h-10 px-4 text-base leading-5",
+  lg: "h-12 px-5 text-base leading-5",
 };
 
 export function Button({
