@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { RadioGroup, type RadioOption } from "@/components/atoms/RadioGroup/RadioGroup";
-import { Input } from "@/components/atoms/Input/Input";
 import { Dropdown, type DropdownOption } from "@/components/atoms/Dropdown/Dropdown";
 
 export type FilterProps = {
@@ -70,8 +69,8 @@ export function Filter({
   selectedBudget,
   selectedSeoulRegion,
   selectedNonSeoulRegion,
-  customBudgetMin = "10,000",
-  customBudgetMax = "1,000,000,000",
+  customBudgetMin = "",
+  customBudgetMax = "",
   onCategoryChange,
   onBudgetChange,
   onSeoulRegionChange,
@@ -100,16 +99,18 @@ export function Filter({
   const showCustomInput = localSelectedBudget === "custom";
 
   return (
-    <div className={`w-80 h-[1369px] bg-white inline-flex justify-start items-start gap-[62px] flex-wrap content-start overflow-hidden ${className}`}>
-      <div className="justify-start text-black text-xl font-normal font-['Pretendard'] capitalize leading-7">
-        filter
+    <div className={`w-80 bg-white flex flex-col items-start gap-6 ${className}`}>
+      <div className="w-full flex justify-between items-center">
+        <span className="text-grey-900 text-xl font-normal font-['Pretendard'] capitalize leading-7">
+          filter
+        </span>
+        <button
+          onClick={onClearAll}
+          className="text-grey-900 text-lg font-normal font-['Pretendard'] underline capitalize leading-6 cursor-pointer hover:opacity-70 transition-opacity"
+        >
+          clear all
+        </button>
       </div>
-      <button
-        onClick={onClearAll}
-        className="justify-start text-black text-lg font-normal font-['Pretendard'] underline capitalize leading-6 cursor-pointer hover:opacity-70 transition-opacity"
-      >
-        clear all
-      </button>
 
       <div className="w-80 inline-flex flex-col justify-start items-start gap-9">
         <div className="w-24 h-56 relative">
@@ -137,29 +138,35 @@ export function Filter({
             />
           </div>
           {showCustomInput && (
-            <div className="w-80 left-[6px] top-[329px] absolute inline-flex justify-start items-center gap-2">
-              <Input
-                type="text"
-                value={localCustomMin}
-                onChange={(e) => setLocalCustomMin(e.target.value)}
-                placeholder="10,000"
-              />
-              <div className="justify-start text-black-default text-base font-normal font-['Pretendard'] capitalize leading-5">
-                ~
+            <div className="w-80 left-0 top-[329px] absolute inline-flex justify-start items-center gap-2">
+              <div className="flex-1 min-w-0 p-2 rounded outline-[0.50px] outline-offset-[-0.50px] outline-text-tertiary flex justify-start items-center gap-2.5">
+                <input
+                  type="text"
+                  value={localCustomMin}
+                  onChange={(e) => setLocalCustomMin(e.target.value)}
+                  placeholder="10,000"
+                  className="flex-1 min-w-0 bg-transparent text-text-disabled text-base font-normal font-['Pretendard'] capitalize leading-5 placeholder:text-text-disabled focus:outline-none"
+                />
               </div>
-              <Input
-                type="text"
-                value={localCustomMax}
-                onChange={(e) => setLocalCustomMax(e.target.value)}
-                placeholder="1,000,000,000"
-              />
+              <span className="text-text-default text-base font-normal font-['Pretendard'] capitalize leading-5">
+                ~
+              </span>
+              <div className="flex-1 min-w-0 p-2 rounded outline-[0.50px] outline-offset-[-0.50px] outline-text-tertiary flex justify-start items-center gap-2.5">
+                <input
+                  type="text"
+                  value={localCustomMax}
+                  onChange={(e) => setLocalCustomMax(e.target.value)}
+                  placeholder="1,000,000,000"
+                  className="flex-1 min-w-0 bg-transparent text-text-disabled text-base font-normal font-['Pretendard'] capitalize leading-5 placeholder:text-text-disabled focus:outline-none"
+                />
+              </div>
               <button
                 onClick={handleApplyCustomBudget}
-                className="p-2 rounded outline-[0.50px] outline-offset-[-0.50px] outline-black-tertiary flex justify-start items-center gap-2.5 cursor-pointer hover:opacity-70 transition-opacity"
+                className="p-2 rounded outline-[0.50px] outline-offset-[-0.50px] outline-text-tertiary flex justify-start items-center gap-2.5 cursor-pointer hover:opacity-70 transition-opacity"
               >
-                <div className="justify-start text-black-disabled text-base font-normal font-['Pretendard'] capitalize leading-5">
+                <span className="text-text-disabled text-base font-normal font-['Pretendard'] capitalize leading-5">
                   적용
-                </div>
+                </span>
               </button>
             </div>
           )}

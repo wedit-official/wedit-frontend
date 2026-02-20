@@ -36,7 +36,7 @@ export function RadioGroup({
             onClick={() => handleSelect(option.value)}
           >
             <div
-              className={`w-3.5 h-3.5 rounded-full border-[0.50px] flex items-center justify-center ${
+              className={`w-3.5 h-3 rounded-full border-[0.50px] flex items-center justify-center ${
                 isSelected
                   ? "bg-white border-black-default"
                   : "bg-white border-black-disabled"
