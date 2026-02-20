@@ -27,7 +27,7 @@ export function Card({
 }: CardProps) {
   return (
     <div
-      className={`w-full min-w-[966px] h-64 relative rounded-[5px] border border-purple-500 overflow-hidden ${className}`}
+      className={`w-full min-w-[966px] h-64 relative rounded-[5px] overflow-hidden ${className}`}
     >
       <div className="w-[926px] h-56 left-5 top-5 absolute bg-white border-b-[0.50px] border-black-tertiary overflow-hidden">
         <div className="w-48 h-48 left-[732px] top-[14px] absolute">
