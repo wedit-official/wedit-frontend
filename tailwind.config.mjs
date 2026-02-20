@@ -1,40 +1,37 @@
-const colors = {
-  emerald: {
-    50: "#ecfdf5",
-    100: "#d1fae5",
-    200: "#a7f3d0",
-    300: "#6ee7b7",
-    400: "#34d399",
-    500: "#10b981",
-    600: "#059669",
-    700: "#047857",
-    800: "#065f46",
-    900: "#064e3b",
-  },
-  amber: {
-    50: "#fffbeb",
-    100: "#fef3c7",
-    200: "#fde68a",
-    300: "#fcd34d",
-    400: "#fbbf24",
-    500: "#f59e0b",
-    600: "#d97706",
-    700: "#b45309",
-    800: "#92400e",
-    900: "#78350f",
-  },
-  rose: {
-    50: "#fff1f2",
-    100: "#ffe4e6",
-    200: "#fecdd3",
-    300: "#fda4af",
-    400: "#fb7185",
-    500: "#f43f5e",
-    600: "#e11d48",
-    700: "#be123c",
-    800: "#9f1239",
-    900: "#881337",
-  },
+const coral = {
+  100: "#FFEAED",
+  200: "#FFEAD9",
+  300: "#FFC9C8",
+  400: "#FF6669",
+  500: "#E65251",
+  600: "#CC5254",
+  700: "#B24647",
+  800: "#983D3D",
+  900: "#732E2F",
+};
+
+const pink = {
+  100: "#FFF3F5",
+  200: "#FFE2E7",
+  300: "#FFC6CF",
+  400: "#FF9B9D",
+  500: "#E68C8E",
+  600: "#CC7C7E",
+  700: "#B26A6F",
+  800: "#995A5F",
+  900: "#814F50",
+};
+
+const grey = {
+  100: "#FBFBFB",
+  200: "#E0E0E0",
+  300: "#C7C7C7",
+  400: "#B4B4B4",
+  500: "#919191",
+  600: "#7A7A7A",
+  700: "#616161",
+  800: "#4B4B4B",
+  900: "#333333",
 };
 
 const config = {
@@ -42,26 +39,39 @@ const config = {
   theme: {
     extend: {
       colors: {
-        // BRAND COLOR
-        brand: {
-          primary: "#FF6669",
-          secondary: "#FF9B9D",
-          tertiary: "#FFEDEE",
-          DEFAULT: "#FF6669",
-        },
-        // BLACK
+        coral,
+        pink,
+        grey,
+        white: "#FFFFFF",
         black: {
-          default: "#111111",
-          secondary: "#505050",
-          tertiary: "#767676",
-          disabled: "#999999",
-          DEFAULT: "#111111",
+          default: "#000000",
+          secondary: grey[800],
+          tertiary: grey[600],
+          disabled: grey[500],
+          DEFAULT: "#000000",
         },
-        // GRAY
+        brand: {
+          primary: coral[400],
+          secondary: pink[400],
+          tertiary: pink[100],
+          DEFAULT: coral[400],
+        },
+        text: {
+          default: "#000000",
+          secondary: grey[800],
+          tertiary: grey[600],
+          disabled: grey[500],
+        },
         gray: {
-          300: "#DDDDDD",
-          200: "#F2F2F2",
-          100: "#F7F7F7",
+          100: grey[100],
+          200: grey[200],
+          300: grey[300],
+          400: grey[400],
+          500: grey[500],
+          600: grey[600],
+          700: grey[700],
+          800: grey[800],
+          900: grey[900],
           white: "#FFFFFF",
         },
       },
@@ -69,18 +79,17 @@ const config = {
         sans: ["Pretendard", "system-ui", "-apple-system", "sans-serif"],
       },
       fontSize: {
-        // Typography
-        "head-1": ["48px", { lineHeight: "140%", letterSpacing: "-2.5px" }],
-        "head-2": ["26px", { lineHeight: "140%", letterSpacing: "-2.5px" }],
-        "head-3": ["20px", { lineHeight: "140%", letterSpacing: "-2.5px" }],
-        "head-4": ["18px", { lineHeight: "140%", letterSpacing: "-2.5px" }],
-        "head-5": ["18px", { lineHeight: "140%", letterSpacing: "-2.5px" }],
-        "body-1": ["18px", { lineHeight: "140%", letterSpacing: "-2.5px" }],
-        "body-2": ["15px", { lineHeight: "140%", letterSpacing: "-2.5px" }],
-        "body-3": ["15px", { lineHeight: "140%", letterSpacing: "-2.5px" }],
+        "head-1": ["48px", { lineHeight: "140%", letterSpacing: "-2.5px" }], // Semi Bold
+        "head-2": ["26px", { lineHeight: "140%", letterSpacing: "-2.5px" }], // Semi Bold
+        "head-3": ["20px", { lineHeight: "140%", letterSpacing: "-2.5px" }], // Regular
+        "head-4": ["18px", { lineHeight: "140%", letterSpacing: "-2.5px" }], // Extra Bold
+        "head-5": ["18px", { lineHeight: "140%", letterSpacing: "-2.5px" }], // Semi Bold
+        "body-1": ["18px", { lineHeight: "140%", letterSpacing: "-2.5px" }], // Regular
+        "body-2": ["15px", { lineHeight: "140%", letterSpacing: "-2.5px" }], // Regular
+        "body-3": ["15px", { lineHeight: "140%", letterSpacing: "-2.5px" }], // Semi Bold
+        caption: ["15px", { lineHeight: "140%", letterSpacing: "-2.5px" }], // Regular
       },
       fontWeight: {
-        // Pretendard 폰트 weight
         regular: "400",
         semibold: "600",
         extrabold: "800",

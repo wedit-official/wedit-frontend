@@ -2,24 +2,65 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #111111;
+  --foreground: #000000;
 
-  /* BRAND COLOR */
-  --brand-primary: #FF6669;
-  --brand-secondary: #FF9B9D;
-  --brand-tertiary: #FFEDEE;
+  /* Coral */
+  --coral-100: #FFEAED;
+  --coral-200: #FFEAD9;
+  --coral-300: #FFC9C8;
+  --coral-400: #FF6669;
+  --coral-500: #E65251;
+  --coral-600: #CC5254;
+  --coral-700: #B24647;
+  --coral-800: #983D3D;
+  --coral-900: #732E2F;
 
-  /* BLACK */
-  --black-default: #111111;
-  --black-secondary: #505050;
-  --black-tertiary: #767676;
-  --black-disabled: #999999;
+  /* Pink */
+  --pink-100: #FFF3F5;
+  --pink-200: #FFE2E7;
+  --pink-300: #FFC6CF;
+  --pink-400: #FF9B9D;
+  --pink-500: #E68C8E;
+  --pink-600: #CC7C7E;
+  --pink-700: #B26A6F;
+  --pink-800: #995A5F;
+  --pink-900: #814F50;
 
-  /* GRAY */
-  --gray-300: #DDDDDD;
-  --gray-200: #F2F2F2;
-  --gray-100: #F7F7F7;
-  --gray-white: #FFFFFF;
+  /* Grey */
+  --grey-100: #FBFBFB;
+  --grey-200: #E0E0E0;
+  --grey-300: #C7C7C7;
+  --grey-400: #B4B4B4;
+  --grey-500: #919191;
+  --grey-600: #7A7A7A;
+  --grey-700: #616161;
+  --grey-800: #4B4B4B;
+  --grey-900: #333333;
+
+  /* W&B */
+  --white: #FFFFFF;
+  --black: #000000;
+
+  /* Brand (alias) */
+  --brand-primary: var(--coral-400);
+  --brand-secondary: var(--pink-400);
+  --brand-tertiary: var(--pink-100);
+
+  /* Text semantic */
+  --text-default: var(--black);
+  --text-secondary: var(--grey-800);
+  --text-tertiary: var(--grey-600);
+  --text-disabled: var(--grey-500);
+
+  /* Legacy */
+  --black-default: var(--black);
+  --black-secondary: var(--grey-800);
+  --black-tertiary: var(--grey-600);
+  --black-disabled: var(--grey-500);
+  --gray-100: var(--grey-100);
+  --gray-200: var(--grey-200);
+  --gray-300: var(--grey-300);
+  --gray-white: var(--white);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -82,10 +123,17 @@ body {
   font-size: 15px;
   line-height: 140%;
   letter-spacing: -2.5px;
-  font-weight: 600; /* Semi Bold */
+  font-weight: 400; /* Regular */
 }
 
 .text-body-3 {
+  font-size: 15px;
+  line-height: 140%;
+  letter-spacing: -2.5px;
+  font-weight: 600; /* Semi Bold */
+}
+
+.text-caption {
   font-size: 15px;
   line-height: 140%;
   letter-spacing: -2.5px;
