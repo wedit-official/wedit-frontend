@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -36,7 +36,10 @@ export type PriceBarChartDataPoint = {
 
 export type PriceBarChartProps = {
   data: PriceBarChartDataPoint[];
+  /** Controlled: 강조할 월(1–12). 미전달 시 막대 클릭으로 내부 state 갱신 */
   highlightedMonth?: number;
+  /** Controlled 모드에서 강조 월 변경 시 호출 */
+  onHighlightChange?: (month: number | null) => void;
   className?: string;
   maxValue?: number;
 };
@@ -54,16 +57,9 @@ function formatPrice(value: number): string {
   return `${value}만원`;
 }
 
-function CustomTooltip({
-  active,
-  payload,
-}: {
-  active?: boolean;
-  payload?: Array<{ payload: PriceBarChartDataPoint }>;
-  label?: string;
-}) {
-  if (!active || !payload?.length) return null;
-  const { monthLabel, value } = payload[0].payload;
+/** 강조 시에만 표시하는 툴팁 박스 (hover 시에는 노출 안 함) */
+function HighlightTooltipContent({ entry }: { entry: PriceBarChartDataPoint }) {
+  const { monthLabel, value } = entry;
   return (
     <div className="px-4 py-2 bg-white rounded-lg shadow-[3px_6px_12px_2px_rgba(0,0,0,0.15)] flex flex-col justify-center items-center min-w-[128px]">
       <div className="text-center text-grey-900 text-xl font-normal font-['Pretendard'] capitalize leading-7">
@@ -78,16 +74,38 @@ function CustomTooltip({
 
 export function PriceBarChart({
   data,
-  highlightedMonth,
+  highlightedMonth: highlightedMonthProp,
+  onHighlightChange,
   className = "",
   maxValue: maxValueProp,
 }: PriceBarChartProps) {
-  const maxValue =
-    maxValueProp ?? Math.max(...data.map((d) => d.value), 1);
+  const [internalMonth, setInternalMonth] = useState<number | null>(null);
+  const isControlled = highlightedMonthProp !== undefined;
+  const highlightedMonth = isControlled ? highlightedMonthProp ?? null : internalMonth;
   const hasHighlight = highlightedMonth != null;
 
+  const handleBarClick = (entry: PriceBarChartDataPoint) => {
+    const next = entry.month === highlightedMonth ? null : entry.month;
+    if (!isControlled) setInternalMonth(next);
+    onHighlightChange?.(next);
+  };
+
+  const maxValue =
+    maxValueProp ?? Math.max(...data.map((d) => d.value), 1);
+
+  const highlightedEntry = hasHighlight
+    ? data.find((d) => d.month === highlightedMonth)
+    : null;
+
   return (
-    <div className={`w-full h-96 ${className}`}>
+    <div
+      className={`relative w-full h-96 outline-none focus:outline-none focus-visible:outline-none [&_*]:outline-none [&_*]:focus:outline-none [&_*]:focus-visible:outline-none [&_*]:ring-0 ${className}`}
+    >
+      {highlightedEntry && (
+        <div className="absolute left-1/2 top-[18px] z-10 -translate-x-1/2">
+          <HighlightTooltipContent entry={highlightedEntry} />
+        </div>
+      )}
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
@@ -150,19 +168,18 @@ export function PriceBarChart({
               );
             }}
           />
-          <Tooltip
-            content={<CustomTooltip />}
-            cursor={false}
-            allowEscapeViewBox={{ x: true, y: true }}
-            position={{ y: 0 }}
-            isAnimationActive={false}
-          />
+          <Tooltip content={() => null} cursor={false} />
           <Bar
             dataKey="value"
             radius={[8, 8, 0, 0]}
             maxBarSize={48}
             isAnimationActive={true}
             animationDuration={300}
+            onClick={(ev: { payload?: PriceBarChartDataPoint }) => {
+              const entry = ev?.payload;
+              if (entry && typeof entry.month === "number") handleBarClick(entry);
+            }}
+            style={{ cursor: "pointer" }}
           >
             {data.map((entry) => {
               const isHighlighted =
