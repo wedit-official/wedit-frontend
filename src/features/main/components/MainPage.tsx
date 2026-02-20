@@ -15,9 +15,7 @@ export function MainPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-grey-300">
-      {/* Hero: 배경 + 헤더 + 타이틀 + SearchBar + 버튼 */}
       <section className="relative min-h-[900px] w-full flex flex-col">
-        {/* 배경: mainBackground.png + 그라데이션 오버레이 + 블러 원 */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
             src="/mainBackground.png"

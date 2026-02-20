@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 const DEFAULT_PLACEHOLDER =
@@ -10,7 +11,7 @@ export type SearchBarProps = {
   placeholder?: string;
   value?: string;
   onChange?: (value: string) => void;
-  onSubmit?: (e: React.FormEvent) => void;
+  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
   focused?: boolean;
   className?: string;
   inputClassName?: string;
@@ -23,7 +24,7 @@ const outlineBase =
 
 export function SearchBar({
   placeholder = DEFAULT_PLACEHOLDER,
-  value = "",
+  value: valueProp,
   onChange,
   onSubmit,
   focused = false,
@@ -34,6 +35,11 @@ export function SearchBar({
 }: SearchBarProps) {
   const id = React.useId();
   const inputId = idProp ?? id;
+
+  const [internalValue, setInternalValue] = useState("");
+  const isControlled = onChange !== undefined;
+  const value = isControlled ? (valueProp ?? "") : internalValue;
+  const handleChange = onChange ?? ((v: string) => setInternalValue(v));
 
   const wrapperClassName = [
     "w-full min-w-[280px] max-w-[922px] px-6 py-4 bg-white rounded-[222px] flex justify-between items-center gap-3 overflow-hidden",
@@ -49,9 +55,9 @@ export function SearchBar({
       id={inputId}
       type="search"
       value={value}
-      onChange={onChange ? (e) => onChange(e.target.value) : undefined}
+      onChange={(e) => handleChange(e.target.value)}
       placeholder={placeholder}
-      readOnly={!onChange}
+      readOnly={false}
       aria-label={ariaLabel}
       className={[
         "flex-1 min-w-0 bg-transparent text-left text-grey-700 text-lg font-regular font-['Pretendard'] uppercase leading-6 placeholder:text-grey-700 focus:outline-none",
