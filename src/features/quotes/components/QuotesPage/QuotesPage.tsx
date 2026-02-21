@@ -112,7 +112,7 @@ export function QuotesPage() {
 
         {/* Tabs + actions */}
         <div className="mt-12 flex items-center justify-between">
-          <div className="inline-flex items-center gap-6">
+          <div className="inline-flex items-center gap-4">
             {quoteCategories.map((cat) => (
               <CategoryPill
                 key={cat}
@@ -144,8 +144,8 @@ export function QuotesPage() {
         </div>
 
         {/* Cards grid */}
-        <div className="mt-8 h-[216px] overflow-y-auto overscroll-contain pr-2">
-          <div className="grid grid-cols-4 auto-rows-[96px] gap-6">
+        <div className="mt-8 h-[248px] overflow-y-auto overscroll-contain pr-2">
+          <div className="grid auto-rows-[112px] gap-6 grid-cols-[repeat(auto-fill,minmax(min(100%,18.75rem),1fr))]">
             {items.map((item) => (
               <QuoteCard
                 key={item.id}
@@ -170,37 +170,46 @@ export function QuotesPage() {
           </div>
         </div>
 
-        {/* Summary frame — 좌측 2/3(약 67%), 우측 총 견적 1/3(약 33%) 비율 */}
-        <div className="mt-12 rounded-xl bg-[var(--gray-white)] outline outline-[0.6px] outline-offset-[-0.6px] outline-[color:var(--gray-300)]">
-          <div className="grid grid-cols-[6fr_4fr]">
-            <div className="grid min-w-0 grid-cols-2 grid-rows-2">
+        {/* 하단 견적 프레임 — 좌(카드 4슬롯):우(총 견적) = 6:5, QuoteCard h-28에 맞춰 높이 확보 */}
+        <div className="mt-12 h-96 w-full rounded-xl bg-white outline outline-[0.6px] outline-offset-[-0.6px] outline-[color:var(--gray-300)] overflow-hidden">
+          <div className="flex h-full w-full gap-6 p-6">
+            {/* 좌측: 카드 영역 (6) */}
+            <div className="grid min-w-0 flex-[6] grid-cols-[repeat(auto-fill,minmax(min(100%,18.75rem),1fr))] gap-4">
               {[
-                { label: "웨딩홀", item: selectedWeddingHall },
-                { label: "스튜디오", item: selectedStudio },
-                { label: "메이크업", item: selectedMakeup },
-                { label: "드레스", item: selectedDress },
-              ].map((slot, idx) => (
-                <div
-                  key={slot.label}
-                  className={[
-                    "min-h-[150px] p-6",
-                    idx % 2 === 0 ? "border-r border-[color:var(--gray-300)]" : "",
-                    idx < 2 ? "border-b border-[color:var(--gray-300)]" : "",
-                  ].join(" ")}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="text-head-5 text-[var(--black-default)] uppercase">{slot.label}</div>
+                { key: "weddinghall" as const, label: "웨딩홀", item: selectedWeddingHall },
+                { key: "studio" as const, label: "스튜디오", item: selectedStudio },
+                { key: "dress" as const, label: "드레스", item: selectedDress },
+                { key: "makeup" as const, label: "메이크업", item: selectedMakeup },
+              ].map((slot) => (
+                <div key={slot.key} className="flex min-w-0 flex-col gap-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-body-2 font-semibold capitalize text-[var(--black-default)]">
+                      {slot.label}
+                    </span>
+                    {slot.item ? (
+                      <button
+                        type="button"
+                        className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded hover:opacity-80"
+                        onClick={() => toggleSelectForCategory(slot.item!.id)}
+                        aria-label={`${slot.label} 선택 해제`}
+                      >
+                        <span className="h-0 w-3.5 border-t-[2.5px] border-[color:var(--black-tertiary)]" />
+                      </button>
+                    ) : null}
                   </div>
                   {slot.item ? (
-                    <div className="mt-4">
+                    <div className="min-h-[7rem] flex-1 rounded-2xl p-2">
                       <QuoteCard
                         item={slot.item}
                         mode="selected"
                         rightTop={
                           <button
                             type="button"
-                            onClick={() => openOptionModal(slot.item!.id)}
-                            className="rounded bg-[var(--gray-white)] px-2 py-0.5 text-xs font-medium leading-5 text-[var(--black-default)] outline outline-[0.6px] outline-offset-[-0.6px] outline-[color:var(--black-tertiary)] opacity-80 hover:opacity-100"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              openOptionModal(slot.item!.id);
+                            }}
+                            className="rounded bg-white px-1.5 py-0.5 text-xs font-medium leading-5 text-[var(--black-secondary)] outline outline-[0.6px] outline-offset-[-0.6px] outline-[color:var(--black-tertiary)] opacity-80 hover:opacity-100"
                           >
                             옵션변경
                           </button>
@@ -208,28 +217,44 @@ export function QuotesPage() {
                       />
                     </div>
                   ) : (
-                    <div className="mt-6 h-20 w-full rounded-lg bg-[var(--gray-100)]" />
+                    <div className="flex min-h-[7rem] flex-1 items-center justify-center gap-2 rounded-2xl border border-dashed border-[color:var(--gray-300)]">
+                      <div className="flex flex-col items-center justify-center gap-1">
+                        <Image
+                          src="/assets/icons/line.svg"
+                          alt=""
+                          width={24}
+                          height={24}
+                          className="h-6 w-6"
+                        />
+                        <span className="text-body-3 text-[var(--black-tertiary)]">
+                          업체를 선택해 보세요
+                        </span>
+                      </div>
+                    </div>
                   )}
                 </div>
               ))}
             </div>
 
-            <div className="flex items-center justify-center p-8">
-              <div className="flex w-full items-center gap-8">
-                <div className="relative h-40 w-44 shrink-0">
+            {/* 우측: 총 견적 (5) — 패널 전체는 중앙, 내부는 카트 좌측 + (총 견적·가격은 가격 기준 좌측 위) */}
+            <div className="flex flex-[5] items-center justify-center">
+              <div className="flex items-center gap-4">
+                <div className="relative flex h-36 w-40 shrink-0 items-center justify-center">
+                  <div className="absolute left-0 top-0 h-28 w-28 rounded-full bg-[var(--brand-secondary)] opacity-75" />
+                  <div className="absolute right-0 top-8 h-12 w-12 rounded-full bg-[var(--brand-secondary)]" />
                   <Image
                     src="/assets/graphic/cart.svg"
                     alt=""
-                    width={176}
-                    height={160}
-                    priority
-                    className="h-full w-full object-contain"
+                    width={160}
+                    height={144}
+                    className="relative h-36 w-40 object-contain"
                   />
                 </div>
-
-                <div className="flex min-w-0 flex-1 flex-col items-start">
-                  <div className="text-head-5 text-[var(--black-secondary)] uppercase">총 견적</div>
-                  <div className="mt-2 whitespace-nowrap text-head-1 text-[var(--brand-primary)]">
+                <div className="flex flex-col items-start gap-1">
+                  <div className="text-2xl font-medium uppercase leading-9 text-[var(--black-secondary)]">
+                    총 견적
+                  </div>
+                  <div className="whitespace-nowrap text-5xl font-semibold uppercase leading-[67.2px] text-[var(--brand-primary)]">
                     {formatWon(totalWon)}
                   </div>
                 </div>

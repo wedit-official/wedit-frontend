@@ -24,15 +24,13 @@ export function QuoteCard({
   const lines = getItemSummaryLines(item);
   const priceWon = getItemPriceWon(item);
 
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={[
-        "relative h-24 w-80 rounded px-1.5 py-1 text-left",
-        mode === "selected" ? "cursor-default" : "hover:bg-[var(--gray-100)]",
-      ].join(" ")}
-    >
+  const baseClassName = [
+    "relative h-28 min-w-[18.75rem] w-full rounded px-1.5 py-1 text-left",
+    mode === "selected" ? "cursor-default" : "hover:bg-[var(--gray-100)]",
+  ].join(" ");
+
+  const content = (
+    <>
       {showRadio ? (
         <span
           aria-hidden
@@ -48,10 +46,16 @@ export function QuoteCard({
       ) : null}
 
       <div className="flex w-full items-center gap-4">
-        <div className="h-20 w-20 overflow-hidden rounded-lg bg-[var(--gray-200)]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+        <div className="h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-[var(--gray-200)]">
           {item.imageSrc ? (
-            <img src={item.imageSrc} alt="" className="h-full w-full object-cover" />
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={item.imageSrc}
+              alt=""
+              width={96}
+              height={96}
+              className="h-full w-full object-cover"
+            />
           ) : null}
         </div>
 
@@ -77,6 +81,14 @@ export function QuoteCard({
           </div>
         </div>
       </div>
+    </>
+  );
+
+  return mode === "selected" ? (
+    <div className={baseClassName}>{content}</div>
+  ) : (
+    <button type="button" onClick={onClick} className={baseClassName}>
+      {content}
     </button>
   );
 }
