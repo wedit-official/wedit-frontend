@@ -101,6 +101,28 @@ export function QuotesPage() {
     return id ? allItems.find((x) => x.id === id) ?? null : null;
   }, [allItems, optionModal.itemId]);
 
+  // 카드 리스트: 행 수 변화 시 높이 부드럽게 전환 (위아래)
+  const cardsListRef = React.useRef<HTMLDivElement>(null);
+  const prevCardsHeightRef = React.useRef<number | null>(null);
+  const [cardsListHeight, setCardsListHeight] = React.useState<number | null>(null);
+
+  React.useLayoutEffect(() => {
+    const el = cardsListRef.current;
+    if (!el) return;
+    const nextH = el.scrollHeight;
+    if (prevCardsHeightRef.current === null) {
+      prevCardsHeightRef.current = nextH;
+      setCardsListHeight(nextH);
+      return;
+    }
+    setCardsListHeight(prevCardsHeightRef.current);
+    const id = requestAnimationFrame(() => {
+      setCardsListHeight(nextH);
+      prevCardsHeightRef.current = nextH;
+    });
+    return () => cancelAnimationFrame(id);
+  }, [items.length, activeCategory]);
+
   // 우측 총 견적: 가격 길이 변화 시 너비만 부드럽게 전환 (늘어남/줄어듦)
   const totalBlockRef = React.useRef<HTMLDivElement>(null);
   const prevWidthRef = React.useRef<number | null>(null);
@@ -172,10 +194,17 @@ export function QuotesPage() {
           )}
         </div>
 
-        {/* Cards grid */}
-        <div className="mt-8 h-[248px] overflow-y-auto overscroll-contain pr-2">
-          <div className="grid auto-rows-[112px] gap-6 grid-cols-[repeat(auto-fill,minmax(min(100%,18.75rem),1fr))]">
-            {items.map((item) => (
+        {/* Cards grid — 행 수 바뀔 때 높이 전환, 한 줄이면 하단 견적이 올라옴 */}
+        <div
+          className="mt-8 overflow-hidden transition-[height] duration-300 ease-out"
+          style={cardsListHeight !== null ? { height: Math.min(cardsListHeight, 248) } : undefined}
+        >
+          <div className="max-h-[248px] overflow-y-auto overscroll-contain pr-2">
+            <div
+              ref={cardsListRef}
+              className="grid auto-rows-[112px] gap-6 grid-cols-[repeat(auto-fill,minmax(min(100%,18.75rem),1fr))]"
+            >
+              {items.map((item) => (
               <QuoteCard
                 key={item.id}
                 item={item}
@@ -195,6 +224,7 @@ export function QuotesPage() {
                 }}
               />
             ))}
+            </div>
           </div>
         </div>
 

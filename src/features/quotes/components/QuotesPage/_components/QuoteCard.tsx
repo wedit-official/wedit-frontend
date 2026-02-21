@@ -33,32 +33,33 @@ export function QuoteCard({
 
   const content = (
     <>
-      <div className="flex w-full items-center gap-4">
+      <div className="flex w-full items-stretch gap-4">
         <div className="h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-[var(--gray-200)]">
           {item.imageSrc ? (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img
               src={item.imageSrc}
               alt=""
-              width={96}
-              height={96}
+              width={95}
+              height={95}
               className="h-full w-full object-cover"
             />
           ) : null}
         </div>
 
-        <div className="flex min-w-0 flex-1 flex-col gap-2">
-          <div className="flex items-start justify-between gap-3">
-            <div className="min-w-0 text-body-2 text-[var(--black-default)] uppercase truncate">
+        <div className="flex min-h-24 min-w-0 flex-1 flex-col justify-between">
+          {/* 제목 + 태그: 카드 상단에 붙음 */}
+          <div className="flex items-start justify-between gap-2">
+            <div className="min-w-0 text-head-5 text-[var(--black-default)] uppercase truncate">
               {item.vendorName}
             </div>
             {rightTop}
           </div>
-
-          <div className="flex items-end justify-between gap-3">
+          {/* 옵션 + 가격: 카드 하단에 붙음 */}
+          <div className="flex items-end justify-between gap-2">
             <div className="min-w-0 text-body-3 text-[var(--black-secondary)]">
               {lines.map((l) => (
-                <div key={l} className="truncate">
+                <div key={l} className="truncate leading-tight">
                   {l}
                 </div>
               ))}
