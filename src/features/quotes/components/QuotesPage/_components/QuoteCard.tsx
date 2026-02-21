@@ -11,40 +11,28 @@ export function QuoteCard({
   mode,
   rightTop,
   onClick,
-  showRadio,
-  radioChecked,
+  selectedForDelete,
 }: {
   item: QuoteItem;
   mode: QuoteCardMode;
   rightTop: React.ReactNode;
   onClick?: () => void;
-  showRadio?: boolean;
-  radioChecked?: boolean;
+  /** 삭제 모드에서 이 카드가 삭제 대상으로 선택된 경우 테두리/채움 강조 */
+  selectedForDelete?: boolean;
 }) {
   const lines = getItemSummaryLines(item);
   const priceWon = getItemPriceWon(item);
 
   const baseClassName = [
-    "relative h-28 min-w-[18.75rem] w-full rounded px-1.5 py-1 text-left",
-    mode === "selected" ? "cursor-default" : "hover:bg-[var(--gray-100)]",
+    "relative min-w-[18.75rem] w-full rounded-lg px-1.5 py-1 text-left",
+    mode === "selected" ? "cursor-default" : "",
+    selectedForDelete
+      ? "outline outline-[1px] outline-offset-[-1px] outline-[var(--coral-400)] bg-[var(--pink-200)]"
+      : "",
   ].join(" ");
 
   const content = (
     <>
-      {showRadio ? (
-        <span
-          aria-hidden
-          className={[
-            "absolute left-2 top-2 inline-flex h-4 w-4 items-center justify-center rounded-full border bg-[var(--gray-white)]",
-            radioChecked ? "border-[var(--brand-primary)]" : "border-[var(--gray-300)]",
-          ].join(" ")}
-        >
-          {radioChecked ? (
-            <span className="h-2 w-2 rounded-full bg-[var(--brand-primary)]" />
-          ) : null}
-        </span>
-      ) : null}
-
       <div className="flex w-full items-center gap-4">
         <div className="h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-[var(--gray-200)]">
           {item.imageSrc ? (

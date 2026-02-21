@@ -11,6 +11,7 @@ import {
 } from "@/features/quotes/model/quotes";
 import { useQuotesStore } from "@/features/quotes/store/quotesStore";
 
+import { DeleteConfirmModal } from "./_components/DeleteConfirmModal";
 import { OptionChangeModal } from "./_components/OptionChangeModal";
 import { QuoteCard } from "./_components/QuoteCard";
 
@@ -93,6 +94,8 @@ export function QuotesPage() {
     return list.reduce((sum, item) => sum + getItemPriceWon(item), 0);
   }, [selectedWeddingHall, selectedStudio, selectedDress, selectedMakeup]);
 
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = React.useState(false);
+
   const modalItem = React.useMemo(() => {
     const id = optionModal.itemId;
     return id ? allItems.find((x) => x.id === id) ?? null : null;
@@ -155,7 +158,11 @@ export function QuotesPage() {
             </button>
           ) : (
             <div className="inline-flex items-center gap-3">
-              <Button size="sm" onClick={deleteSelected} className="px-6">
+              <Button
+                size="sm"
+                onClick={() => setDeleteConfirmOpen(true)}
+                className="px-6"
+              >
                 삭제
               </Button>
               <Button size="sm" variant="outline" onClick={cancelDeleteMode} className="px-6">
@@ -173,8 +180,7 @@ export function QuotesPage() {
                 key={item.id}
                 item={item}
                 mode="list"
-                showRadio={deleteMode}
-                radioChecked={Boolean(deleteSelection[item.id])}
+                selectedForDelete={deleteMode && Boolean(deleteSelection[item.id])}
                 rightTop={
                   <span className="rounded bg-[var(--brand-tertiary)] px-1.5 py-0.5 text-xs font-medium leading-5 text-[var(--brand-primary)]">
                     {item.agencyName}
@@ -322,6 +328,15 @@ export function QuotesPage() {
           if (!optionModal.itemId) return;
           setItemOptions({ itemId: optionModal.itemId, selectedBaseOptionId, selectedExtraOptionIds });
           closeOptionModal();
+        }}
+      />
+
+      <DeleteConfirmModal
+        open={deleteConfirmOpen}
+        onClose={() => setDeleteConfirmOpen(false)}
+        onConfirm={() => {
+          deleteSelected();
+          setDeleteConfirmOpen(false);
         }}
       />
     </div>
