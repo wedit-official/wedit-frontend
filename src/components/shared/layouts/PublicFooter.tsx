@@ -4,8 +4,8 @@ import Link from "next/link";
 
 export function PublicFooter() {
   return (
-    <footer className="w-full bg-grey-300 mt-[70px]">
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-4 px-12 py-7">
+    <footer className="w-full bg-[var(--gray-200)]">
+      <div className="flex w-full flex-col gap-4 px-[clamp(24px,5vw,96px)] py-7">
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-2">
             <div className="text-2xl font-semibold leading-9 text-grey-800">

@@ -50,7 +50,7 @@ function BasketIcon({ className }: { className?: string }) {
 export function PublicHeader() {
   return (
     <header className="w-full">
-      <div className="mx-auto flex w-full max-w-[1440px] items-center gap-2.5 px-12 py-7">
+      <div className="flex w-full items-center gap-2.5 px-[clamp(24px,5vw,96px)] py-7">
         <div className="flex w-full items-center justify-between">
           <Link href="/" className="inline-flex items-center">
             <img

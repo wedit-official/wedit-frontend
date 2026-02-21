@@ -1,3 +1,4 @@
+@config "../../tailwind.config.mjs";
 @import "tailwindcss";
 @config "../../tailwind.config.mjs";
 
@@ -64,12 +65,7 @@
   --gray-white: var(--white);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* 다크모드 미지원 — 항상 라이트 톤 유지 (필요 시 prefers-color-scheme 블록 추가) */
 
 body {
   background: var(--background);
