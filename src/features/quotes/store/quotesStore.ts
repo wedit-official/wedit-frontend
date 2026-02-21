@@ -41,15 +41,14 @@ type QuotesState = {
 };
 
 function createMockItems(): QuoteItem[] {
-  // 목 이미지 — public/assets/image 아래 파일들에서 랜덤 땜빵 (Next.js 기준 경로: /assets/image/...)
+  // 목 이미지 — id 기반 결정적 선택 (SSR/클라이언트 동일하여 hydration 일치)
   const imagePool = [
     "/assets/image/testImg1.png",
     "/assets/image/testImg2.png",
     "/assets/image/testImg3.png",
-    // 필요 시 추가: "/assets/image/testImg2.png", ...
   ];
-  const pickRandomImage = () =>
-    imagePool[Math.floor(Math.random() * imagePool.length)]!;
+  const pickImageForId = (id: string) =>
+    imagePool[id.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0) % imagePool.length]!;
 
   // 공통 옵션 샘플(묵데이터)
   const weddingHallBase = [
@@ -94,7 +93,7 @@ function createMockItems(): QuoteItem[] {
       id: "wh-1",
       category: "weddinghall",
       vendorName: "아펠가모 공덕",
-      imageSrc: pickRandomImage(),
+      imageSrc: pickImageForId("wh-1"),
       hallName: "라로브홀",
       agencyName: agencies[0],
       basePriceWon: 10_650_000,
@@ -106,7 +105,7 @@ function createMockItems(): QuoteItem[] {
       id: "wh-2",
       category: "weddinghall",
       vendorName: "아펠가모 공덕",
-      imageSrc: pickRandomImage(),
+      imageSrc: pickImageForId("wh-2"),
       hallName: "라로브홀",
       agencyName: agencies[1],
       basePriceWon: 10_650_000,
@@ -119,7 +118,7 @@ function createMockItems(): QuoteItem[] {
       id: "wh-4",
       category: "weddinghall",
       vendorName: "아펠가모 공덕",
-      imageSrc: pickRandomImage(),
+      imageSrc: pickImageForId("wh-4"),
       hallName: "라로브홀",
       agencyName: agencies[2],
       basePriceWon: 10_650_000,
@@ -131,7 +130,7 @@ function createMockItems(): QuoteItem[] {
       id: "wh-5",
       category: "weddinghall",
       vendorName: "아펠가모 공덕",
-      imageSrc: pickRandomImage(),
+      imageSrc: pickImageForId("wh-5"),
       hallName: "라로브홀",
       agencyName: agencies[3],
       basePriceWon: 10_650_000,
@@ -143,7 +142,7 @@ function createMockItems(): QuoteItem[] {
       id: "wh-6",
       category: "weddinghall",
       vendorName: "아펠가모 공덕",
-      imageSrc: pickRandomImage(),
+      imageSrc: pickImageForId("wh-6"),
       hallName: "라로브홀",
       agencyName: agencies[0],
       basePriceWon: 10_650_000,
@@ -155,7 +154,7 @@ function createMockItems(): QuoteItem[] {
       id: "st-1",
       category: "studio",
       vendorName: "아펠가모 공덕",
-      imageSrc: pickRandomImage(),
+      imageSrc: pickImageForId("st-1"),
       agencyName: agencies[1],
       basePriceWon: 10_650_000,
       baseOptions: studioBase,
@@ -166,7 +165,7 @@ function createMockItems(): QuoteItem[] {
       id: "dr-1",
       category: "dress",
       vendorName: "아펠가모 공덕",
-      imageSrc: pickRandomImage(),
+      imageSrc: pickImageForId("dr-1"),
       agencyName: agencies[2],
       basePriceWon: 10_650_000,
       baseOptions: dressBase,
@@ -177,7 +176,7 @@ function createMockItems(): QuoteItem[] {
       id: "mk-1",
       category: "makeup",
       vendorName: "아펠가모 공덕",
-      imageSrc: pickRandomImage(),
+      imageSrc: pickImageForId("mk-1"),
       agencyName: agencies[3],
       basePriceWon: 10_650_000,
       baseOptions: makeupBase,
@@ -192,7 +191,7 @@ function createMockItems(): QuoteItem[] {
       id: "st-2",
       category: "studio",
       vendorName: "아펠가모 공덕",
-      imageSrc: pickRandomImage(),
+      imageSrc: pickImageForId("st-2"),
       agencyName: agencies[0],
       basePriceWon: 10_650_000,
       baseOptions: studioBase,
@@ -203,7 +202,7 @@ function createMockItems(): QuoteItem[] {
       id: "dr-2",
       category: "dress",
       vendorName: "아펠가모 공덕",
-      imageSrc: pickRandomImage(),
+      imageSrc: pickImageForId("dr-2"),
       agencyName: agencies[1],
       basePriceWon: 10_650_000,
       baseOptions: dressBase,
@@ -214,7 +213,7 @@ function createMockItems(): QuoteItem[] {
       id: "mk-2",
       category: "makeup",
       vendorName: "아펠가모 공덕",
-      imageSrc: pickRandomImage(),
+      imageSrc: pickImageForId("mk-2"),
       agencyName: agencies[2],
       basePriceWon: 10_650_000,
       baseOptions: makeupBase,
@@ -225,7 +224,7 @@ function createMockItems(): QuoteItem[] {
       id: "wh-3",
       category: "weddinghall",
       vendorName: "아펠가모 공덕",
-      imageSrc: pickRandomImage(),
+      imageSrc: pickImageForId("wh-3"),
       hallName: "라로브홀",
       agencyName: agencies[3],
       basePriceWon: 10_650_000,

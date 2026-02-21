@@ -98,11 +98,33 @@ export function QuotesPage() {
     return id ? allItems.find((x) => x.id === id) ?? null : null;
   }, [allItems, optionModal.itemId]);
 
+  // 우측 총 견적: 가격 길이 변화 시 너비만 부드럽게 전환 (늘어남/줄어듦)
+  const totalBlockRef = React.useRef<HTMLDivElement>(null);
+  const prevWidthRef = React.useRef<number | null>(null);
+  const [totalBlockWidth, setTotalBlockWidth] = React.useState<number | null>(null);
+
+  React.useLayoutEffect(() => {
+    const el = totalBlockRef.current;
+    if (!el) return;
+    const nextW = el.scrollWidth;
+    if (prevWidthRef.current === null) {
+      prevWidthRef.current = nextW;
+      setTotalBlockWidth(nextW);
+      return;
+    }
+    setTotalBlockWidth(prevWidthRef.current);
+    const id = requestAnimationFrame(() => {
+      setTotalBlockWidth(nextW);
+      prevWidthRef.current = nextW;
+    });
+    return () => cancelAnimationFrame(id);
+  }, [totalWon]);
+
   return (
     <div className="w-full bg-[var(--gray-white)]">
       <div className="w-full px-[clamp(24px,5vw,96px)] pb-20">
         {/* Title */}
-        <div className="flex flex-col items-center gap-5 pt-10">
+        <div className="flex flex-col items-center gap-5 pt-5">
           <div className="w-full">
             <h1 className="text-center text-head-1 text-[var(--black-default)]">
               00님이 선택한 업체의 견적을 알려드려요
@@ -111,7 +133,7 @@ export function QuotesPage() {
         </div>
 
         {/* Tabs + actions */}
-        <div className="mt-12 flex items-center justify-between">
+        <div className="mt-8 flex items-center justify-between">
           <div className="inline-flex items-center gap-4">
             {quoteCategories.map((cat) => (
               <CategoryPill
@@ -171,18 +193,18 @@ export function QuotesPage() {
         </div>
 
         {/* 하단 견적 프레임 — 좌(카드 4슬롯):우(총 견적) = 6:5, QuoteCard h-28에 맞춰 높이 확보 */}
-        <div className="mt-12 h-96 w-full rounded-xl bg-white outline outline-[0.6px] outline-offset-[-0.6px] outline-[color:var(--gray-300)] overflow-hidden">
+        <div className="mt-6 h-96 w-full rounded-xl bg-white outline outline-[0.6px] outline-offset-[-0.6px] outline-[color:var(--grey-700)] overflow-hidden">
           <div className="flex h-full w-full gap-6 p-6">
-            {/* 좌측: 카드 영역 (6) */}
-            <div className="grid min-w-0 flex-[6] grid-cols-[repeat(auto-fill,minmax(min(100%,18.75rem),1fr))] gap-4">
+            {/* 좌측: 카드 영역 (6) — 2x2 고정, 행 높이 1fr로 박스 세로 크기 고정 */}
+            <div className="grid h-full min-h-0 min-w-0 flex-[6] grid-cols-2 grid-rows-[1fr_1fr] gap-4">
               {[
                 { key: "weddinghall" as const, label: "웨딩홀", item: selectedWeddingHall },
                 { key: "studio" as const, label: "스튜디오", item: selectedStudio },
                 { key: "dress" as const, label: "드레스", item: selectedDress },
                 { key: "makeup" as const, label: "메이크업", item: selectedMakeup },
               ].map((slot) => (
-                <div key={slot.key} className="flex min-w-0 flex-col gap-3">
-                  <div className="flex items-center justify-between gap-2">
+                <div key={slot.key} className="flex min-h-0 min-w-0 flex-col gap-3 self-stretch">
+                  <div className="flex h-7 shrink-0 items-center justify-between gap-2">
                     <span className="text-body-2 font-semibold capitalize text-[var(--black-default)]">
                       {slot.label}
                     </span>
@@ -198,7 +220,7 @@ export function QuotesPage() {
                     ) : null}
                   </div>
                   {slot.item ? (
-                    <div className="min-h-[7rem] flex-1 rounded-2xl p-2">
+                    <div className="h-28 shrink-0 rounded-2xl overflow-hidden">
                       <QuoteCard
                         item={slot.item}
                         mode="selected"
@@ -217,7 +239,27 @@ export function QuotesPage() {
                       />
                     </div>
                   ) : (
-                    <div className="flex min-h-[7rem] flex-1 items-center justify-center gap-2 rounded-2xl border border-dashed border-[color:var(--gray-300)]">
+                    <div className="relative flex h-28 shrink-0 items-center justify-center gap-2 rounded-2xl overflow-hidden">
+                      {/* Figma: outline 1px, outline-offset -1px, 점선·점 간격 넓게 (stroke-dasharray) */}
+                      <svg
+                        className="pointer-events-none absolute inset-0 size-full"
+                        aria-hidden
+                        preserveAspectRatio="none"
+                        viewBox="0 0 320 96"
+                      >
+                        <rect
+                          x="0.5"
+                          y="0.5"
+                          width="319"
+                          height="95"
+                          rx="16"
+                          ry="16"
+                          fill="none"
+                          stroke="var(--grey-600)"
+                          strokeWidth="1"
+                          strokeDasharray="7 7"
+                        />
+                      </svg>
                       <div className="flex flex-col items-center justify-center gap-1">
                         <Image
                           src="/assets/icons/line.svg"
@@ -226,7 +268,7 @@ export function QuotesPage() {
                           height={24}
                           className="h-6 w-6"
                         />
-                        <span className="text-body-3 text-[var(--black-tertiary)]">
+                        <span className="text-body-3 text-[var(--grey-700)]">
                           업체를 선택해 보세요
                         </span>
                       </div>
@@ -236,26 +278,34 @@ export function QuotesPage() {
               ))}
             </div>
 
-            {/* 우측: 총 견적 (5) — 패널 전체는 중앙, 내부는 카트 좌측 + (총 견적·가격은 가격 기준 좌측 위) */}
+            {/* 우측: 총 견적 (5) — 가격 길이에 따라 좌우로만 부드럽게 늘어남/줄어듦 */}
             <div className="flex flex-[5] items-center justify-center">
-              <div className="flex items-center gap-4">
-                <div className="relative flex h-36 w-40 shrink-0 items-center justify-center">
-                  <div className="absolute left-0 top-0 h-28 w-28 rounded-full bg-[var(--brand-secondary)] opacity-75" />
-                  <div className="absolute right-0 top-8 h-12 w-12 rounded-full bg-[var(--brand-secondary)]" />
-                  <Image
-                    src="/assets/graphic/cart.svg"
-                    alt=""
-                    width={160}
-                    height={144}
-                    className="relative h-36 w-40 object-contain"
-                  />
-                </div>
-                <div className="flex flex-col items-start gap-1">
-                  <div className="text-2xl font-medium uppercase leading-9 text-[var(--black-secondary)]">
-                    총 견적
+              <div
+                className="overflow-hidden transition-[width] duration-300 ease-out"
+                style={totalBlockWidth !== null ? { width: totalBlockWidth } : undefined}
+              >
+                <div
+                  ref={totalBlockRef}
+                  className="flex w-min items-center gap-4"
+                >
+                  <div className="relative flex h-36 w-40 shrink-0 items-center justify-center">
+                    <div className="absolute left-0 top-0 h-28 w-28 rounded-full bg-[var(--brand-secondary)] opacity-75" />
+                    <div className="absolute right-0 top-8 h-12 w-12 rounded-full bg-[var(--brand-secondary)]" />
+                    <Image
+                      src="/assets/graphic/cart.svg"
+                      alt=""
+                      width={160}
+                      height={144}
+                      className="relative h-36 w-40 object-contain"
+                    />
                   </div>
-                  <div className="whitespace-nowrap text-5xl font-semibold uppercase leading-[67.2px] text-[var(--brand-primary)]">
-                    {formatWon(totalWon)}
+                  <div className="flex shrink-0 flex-col items-start gap-1">
+                    <div className="text-2xl font-medium uppercase leading-9 text-[var(--black-secondary)]">
+                      총 견적
+                    </div>
+                    <div className="whitespace-nowrap text-5xl font-semibold uppercase leading-[67.2px] text-[var(--brand-primary)]">
+                      {formatWon(totalWon)}
+                    </div>
                   </div>
                 </div>
               </div>
