@@ -1,32 +1,21 @@
-import type { Metadata } from "next";
-import { Geist_Mono, Noto_Sans_KR } from "next/font/google";
+import type { ReactNode } from "react";
+import { FontLoader } from "@/components/FontLoader";
+import { PublicFooter } from "@/components/shared/layouts/PublicFooter";
 import "./globals.css";
-
-const geistMono = Geist_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-});
-
-const notoSansKr = Noto_Sans_KR({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-});
-
-export const metadata: Metadata = {
-  title: "Wedit",
-  description: "결혼 업체 중개 서비스 플랫폼",
-};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSansKr.variable} ${geistMono.variable} antialiased`}>
-        {children}
+      <body className="antialiased flex min-h-screen flex-col">
+        <FontLoader />
+        <main className="flex-1 flex flex-col">{children}</main>
+        <div className="shrink-0">
+          <PublicFooter />
+        </div>
       </body>
     </html>
   );

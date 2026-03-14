@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/atoms";
-import { useCounterStore } from "@/store";
+import { Button } from "@/components/atoms/Button/Button";
+import { useCounterStore } from "@/store/counterStore";
 
 export function Counter() {
   const count = useCounterStore((s) => s.count);
@@ -19,13 +19,13 @@ export function Counter() {
           <p className="text-3xl font-bold tabular-nums">{count}</p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Button size="sm" onClick={dec} variant="secondary">
+          <Button size="sm" onClick={dec} variant="outline">
             -1
           </Button>
           <Button size="sm" onClick={inc}>
             +1
           </Button>
-          <Button size="sm" onClick={reset} variant="ghost">
+          <Button size="sm" onClick={reset} variant="outline">
             Reset
           </Button>
         </div>

@@ -14,6 +14,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Storybook config & stories
+    ".storybook/**",
+    "**/*.stories.*",
     // Storybook init 샘플(프로젝트에서 사용하지 않음)
     "src/stories/**",
   ]),
