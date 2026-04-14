@@ -1,9 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 
 import { Button } from "@/components/ui/atoms/Button/Button";
+import { ApiError } from "@/lib/api";
+
+import { signup } from "@/features/auth/api";
 import { UnderlineField } from "@/features/auth/components/_shared/UnderlineField";
 
 function isValidEmail(email: string) {
@@ -21,6 +25,7 @@ function validatePassword(pw: string) {
 }
 
 export function SignupForm() {
+  const router = useRouter();
   const [phone, setPhone] = React.useState("");
   const [name, setName] = React.useState("");
   const [birth, setBirth] = React.useState("");
@@ -29,6 +34,7 @@ export function SignupForm() {
   const [passwordConfirm, setPasswordConfirm] = React.useState("");
 
   const [submitting, setSubmitting] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
   const [touched, setTouched] = React.useState<Record<string, boolean>>({});
 
   const phoneErrorId = React.useId();
@@ -83,11 +89,17 @@ export function SignupForm() {
     });
     if (!canSubmit) return;
 
+    setError(null);
     setSubmitting(true);
     try {
-      // TODO: API 연동 전까지는 UI/기능만 구현
-      await new Promise((r) => setTimeout(r, 600));
-      alert("회원가입 기능은 준비 중입니다.");
+      await signup({ email, password, name });
+      router.push('/login');
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setError(err.message);
+      } else {
+        setError('회원가입 중 오류가 발생했습니다.');
+      }
     } finally {
       setSubmitting(false);
     }
@@ -313,6 +325,9 @@ export function SignupForm() {
           </div>
         </div>
 
+        {error && (
+          <p className="w-full text-center text-sm text-coral-400">{error}</p>
+        )}
         <div className="inline-flex items-center justify-center gap-8">
           <Button
             type="submit"

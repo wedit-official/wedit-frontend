@@ -45,3 +45,8 @@ storybook-static
 
 # private agent playbook (do not commit)
 .agent/
+
+# Claude Orchestrator
+.orchestrator.json
+*_LOG.md
+PLAN.md
