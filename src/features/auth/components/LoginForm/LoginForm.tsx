@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 
 import { Button } from "@/components/ui/atoms/Button/Button";
+import { ApiError } from "@/lib/api";
 
+import { login } from "@/features/auth/api";
 import { UnderlineField } from "@/features/auth/components/_shared/UnderlineField";
 
 /* eslint-disable @next/next/no-img-element */
@@ -20,9 +23,11 @@ function validatePassword(pw: string) {
 }
 
 export function LoginForm() {
+  const router = useRouter();
   const [id, setId] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [submitting, setSubmitting] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
   const [touched, setTouched] = React.useState<{ id: boolean; password: boolean }>({
     id: false,
     password: false,
@@ -43,11 +48,17 @@ export function LoginForm() {
     setTouched({ id: true, password: true });
     if (!canSubmit) return;
 
+    setError(null);
     setSubmitting(true);
     try {
-      // TODO: API 연동 전까지는 UI/기능만 구현
-      await new Promise((r) => setTimeout(r, 600));
-      alert("로그인 기능은 준비 중입니다.");
+      await login({ email: id, password });
+      router.replace('/');
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setError(err.message);
+      } else {
+        setError('로그인 중 오류가 발생했습니다.');
+      }
     } finally {
       setSubmitting(false);
     }
@@ -84,6 +95,9 @@ export function LoginForm() {
       </div>
 
       <div className="flex w-full flex-col items-center gap-6">
+        {error && (
+          <p className="w-full text-center text-sm text-coral-400">{error}</p>
+        )}
         <Button type="submit" className="w-full" disabled={!canSubmit}>
           {submitting ? "로그인 중..." : "로그인하기"}
         </Button>
